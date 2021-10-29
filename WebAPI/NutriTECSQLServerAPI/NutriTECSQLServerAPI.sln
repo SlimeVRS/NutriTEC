@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NutriTECSQLServerAPI", "NutriTECSQLServerAPI\NutriTECSQLServerAPI.csproj", "{4139DDFF-B5FE-40DF-A580-4E02FC0FB367}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NutriTECSQLServerAPI.Data", "NutriTECSQLServerAPI.Data\NutriTECSQLServerAPI.Data.csproj", "{983B301B-A6C3-4185-8EC4-9D774EAF50C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NutriTECSQLServerAPI.Model", "NutriTECSQLServerAPI.Model\NutriTECSQLServerAPI.Model.csproj", "{ED708B7E-B84C-4766-BAC2-DE8883D8052A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{4139DDFF-B5FE-40DF-A580-4E02FC0FB367}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4139DDFF-B5FE-40DF-A580-4E02FC0FB367}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4139DDFF-B5FE-40DF-A580-4E02FC0FB367}.Release|Any CPU.Build.0 = Release|Any CPU
+		{983B301B-A6C3-4185-8EC4-9D774EAF50C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{983B301B-A6C3-4185-8EC4-9D774EAF50C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{983B301B-A6C3-4185-8EC4-9D774EAF50C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{983B301B-A6C3-4185-8EC4-9D774EAF50C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED708B7E-B84C-4766-BAC2-DE8883D8052A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED708B7E-B84C-4766-BAC2-DE8883D8052A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED708B7E-B84C-4766-BAC2-DE8883D8052A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED708B7E-B84C-4766-BAC2-DE8883D8052A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
