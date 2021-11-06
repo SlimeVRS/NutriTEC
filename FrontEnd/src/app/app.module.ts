@@ -28,7 +28,7 @@ import { RouterModule } from '@angular/router';
       {path: 'home', component: HomeComponent},
       {path: 'singup', component: RegisterComponent}, 
       {path: 'login', component: LoginComponent}, 
-      { path: '**', redirectTo: 'login', pathMatch: 'full' },
+      { path: '**', redirectTo: 'home', pathMatch: 'full' },
       
     ]),
   ],
