@@ -29,9 +29,9 @@
         android:inputType="number"
         android:textColorHint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/start2"
+        app:layout_constraintTop_toBottomOf="@+id/nombre_receta_text"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <Spinner
@@ -130,4 +130,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023" />
+
+    <EditText
+        android:id="@+id/nombre_receta_text"
+        android:layout_width="400dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/nombre_receta"
+        android:textColorHint="@color/black"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.545"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/start2" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

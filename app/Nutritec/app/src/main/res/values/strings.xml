@@ -3,7 +3,8 @@
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
+    <string name="second_fragment_label">Consumo diario</string>
+    <string name="Recipe_fragment">Creación de recetas</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
@@ -20,4 +21,6 @@
     <string name="nut_info">Valores nutricionales</string>
     <string name="salir">Salir</string>
     <string name="confirmar_receta">Confirmar Receta</string>
+    <string name="nombre_receta">Ingrese el nombre de la receta</string>
+    <string name="confirmar_consumo">Registrar</string>
 </resources>

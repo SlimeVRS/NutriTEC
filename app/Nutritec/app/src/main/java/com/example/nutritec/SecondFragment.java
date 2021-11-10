@@ -29,7 +29,7 @@ public class SecondFragment extends Fragment {
     private ArrayAdapter<String> adapterTiempos,adapterComidas;
     private ArrayList<String> arr_comidas,arr_tiempos;
     private Spinner spinTiempo,spinComida;
-    private boolean F=false,bool_food=F,bool_time=F;
+    private boolean F=false,bool_food=F,bool_time=F,add_food=F;
 
     @Override
     public View onCreateView(
@@ -68,7 +68,11 @@ public class SecondFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                spinComida.setSelection(0);
+                try{
+                    spinComida.setSelection(0);
+                }catch (Exception e){
+
+                }
                 //se puede cambiar por una busqueda y una carga de datos al spiner
             }
 
@@ -77,10 +81,22 @@ public class SecondFragment extends Fragment {
 
             }
         });
+        binding.registrarBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (add_food && bool_time){
+                    Snackbar.make(view, "Su consumo se ha registrado", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }else{
+                    Snackbar.make(view, "Debe escoger un horario y haber agregado al menos una comida", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
+            }
+        });
         binding.addComida1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(bool_time) {
+
                     if(bool_food){
                         add_producto();
                         return;
@@ -100,11 +116,8 @@ public class SecondFragment extends Fragment {
                                     .setAction("Action", null).show();
                         }
                     }
-                }else{
-                    Snackbar.make(view, "Debe escoger un horario", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
                 }
-            }
+
         });
     }
     private void add_producto(){
@@ -120,15 +133,15 @@ public class SecondFragment extends Fragment {
         vitaminas+=80;
         calcio+=50;
         hierro+=90;
-        food="";
+        add_food=true;
         mostrar_productos();
         mostrar_valores_nut();
     }
     private void mostrar_productos(){
         TextView productos_text=(TextView) getActivity().findViewById(R.id.productos_text_1);
         productos_text.setText( productos);
-        //displayTextView.setText("Hello");
     }
+
     private void iniciar(){
         spinTiempo();
         spinFood();

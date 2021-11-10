@@ -125,12 +125,12 @@
 
     <Button
         android:id="@+id/add_comida1"
-        android:layout_width="400dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="268dp"
+        android:layout_width="195dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="260dp"
         android:text="@string/add_food"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.636"
+        app:layout_constraintHorizontal_bias="0.027"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -145,4 +145,16 @@
         app:layout_constraintStart_toEndOf="@+id/start_1"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023" />
+
+    <Button
+        android:id="@+id/registrar_btn"
+        android:layout_width="195dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="260dp"
+        android:text="@string/confirmar_consumo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintStart_toEndOf="@+id/add_comida1"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
