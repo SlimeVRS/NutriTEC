@@ -1,9 +1,15 @@
 package com.example.nutritec;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,14 +17,19 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.nutritec.databinding.FragmentSecondBinding;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
 public class SecondFragment extends Fragment {
 
     private FragmentSecondBinding binding;
-    private String productos="",valores;
-    private int porcion,energia,grasa,sodio,carbohidratos,proteína,vitaminas,calcio,hierro;
+    private String productos="",valores,food,time_text;
+    private int porcion,energia,grasa,sodio,carbohidratos,proteína,vitaminas,calcio,hierro,codigo;
+    private ArrayAdapter<String> adapterTiempos,adapterComidas;
+    private ArrayList<String> arr_comidas,arr_tiempos;
+    private Spinner spinTiempo,spinComida;
+    private boolean F=false,bool_food=F,bool_time=F;
 
     @Override
     public View onCreateView(
@@ -42,16 +53,64 @@ public class SecondFragment extends Fragment {
                         .navigate(R.id.action_second_to_recipeFragment);
             }
         });
+        binding.start1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                iniciar();
+            }
+        });
+        EditText editTextBusqueda = getActivity().findViewById(R.id.id_produc_1);
+        editTextBusqueda.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                spinComida.setSelection(0);
+                //se puede cambiar por una busqueda y una carga de datos al spiner
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         binding.addComida1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                add_producto();
+                if(bool_time) {
+                    if(bool_food){
+                        add_producto();
+                        return;
+                    }else{
+                        EditText codigo_text=getActivity().findViewById(R.id.id_produc_1);
+                        String codigo_str=codigo_text.getText().toString();
+                        if (!codigo_str.isEmpty()){
+                            codigo = Integer.parseInt(codigo_str);
+                            //buscar con esto el dato de la comida
+                            if(codigo==1){
+                                food="papas";
+                                add_producto();
+                            }
+                            return;
+                        }else{
+                            Snackbar.make(view, "Debe Ingresar el codigo de la comida o seleccionar una", Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null).show();
+                        }
+                    }
+                }else{
+                    Snackbar.make(view, "Debe escoger un horario", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
             }
         });
     }
     private void add_producto(){
         //se llama al api
-        productos+="Comida"+Integer.toString(porcion)+"\n";
+        //usar food para buscar en el api los datos
+        productos+=food+"\n";
         porcion+=1;
         energia+=300;
         grasa+=100;
@@ -61,8 +120,7 @@ public class SecondFragment extends Fragment {
         vitaminas+=80;
         calcio+=50;
         hierro+=90;
-
-
+        food="";
         mostrar_productos();
         mostrar_valores_nut();
     }
@@ -71,6 +129,72 @@ public class SecondFragment extends Fragment {
         productos_text.setText( productos);
         //displayTextView.setText("Hello");
     }
+    private void iniciar(){
+        spinTiempo();
+        spinFood();
+    }
+    private void spinTiempo(){
+        spinTiempo=getActivity().findViewById(R.id.horario_1);
+        arr_tiempos=new ArrayList();
+        arr_tiempos.add("Seleccione el horario de su consumo");
+        arr_tiempos.add("Desayuno");
+        arr_tiempos.add("Almuerzo");
+        arr_tiempos.add("Cena");
+        arr_tiempos.add("Merienda");
+        adapterTiempos = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item,arr_tiempos);
+        adapterTiempos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinTiempo.setAdapter(adapterTiempos);
+        spinTiempo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
+                if (pos>0){
+                    bool_time=true;
+                    time_text=(String) spinTiempo.getAdapter().getItem(pos);
+                }
+                else{
+                    bool_time=false;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+    }
+
+    private void spinFood(){
+        spinComida=getActivity().findViewById(R.id.comidas_1);
+        arr_comidas=new ArrayList();
+        arr_comidas.add("Seleccione una comida");
+        //cambiar por la coneccion al api
+        arr_comidas.add("papa");
+        arr_comidas.add("chicles");
+        arr_comidas.add("coca");
+        adapterComidas = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item,arr_comidas);
+        adapterComidas.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinComida.setAdapter(adapterComidas);
+        spinComida.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
+                if(pos>0){
+                    bool_food=true;
+                    food=(String) spinComida.getAdapter().getItem(pos);
+                    EditText codigo_text=getActivity().findViewById(R.id.id_produc_1);
+                    codigo_text.getText().clear();
+
+                }else{
+                    bool_food=F;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+    }
+
     private void mostrar_valores_nut(){
         valores="Nutrientes     Cantidad\n"+
                 "Porciones:          "+Integer.toString(porcion)+"g\n" +
