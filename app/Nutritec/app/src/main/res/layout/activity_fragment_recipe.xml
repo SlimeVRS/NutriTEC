@@ -58,8 +58,8 @@
 
     <ScrollView
         android:id="@+id/vista_consumo_2"
-        android:layout_width="394dp"
-        android:layout_height="376dp"
+        android:layout_width="393dp"
+        android:layout_height="322dp"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.47"

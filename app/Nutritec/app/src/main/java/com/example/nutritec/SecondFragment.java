@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class SecondFragment extends Fragment {
 
     private FragmentSecondBinding binding;
-    private String productos="",valores="";
+    private String productos="",valores;
     private int porcion,energia,grasa,sodio,carbohidratos,proteína,vitaminas,calcio,hierro;
 
     @Override
