@@ -1,19 +1,9 @@
-.navbar{
-    max-height: 65px;
-    background-color: #ffffff;
-  }
-  
-  .navbar-brand {
-    width:350px;
-    font-size: 24px;
-  }
-  .navbar-brand img {
+.navbar-brand img {
     height: 50px;
     /* put value of image height as your need */
     float: right;
     margin-right: 7px;
-  }
-  .button {
+  }  .button {
     background-color: #d6c41e; /* Green */
     border: none;
     color: rgb(0, 0, 0);
@@ -35,4 +25,13 @@
     font-size: 16px;  
     font-weight:bold;
     color:white;
+  }
+  .navbar{
+    max-height: 65px;
+    background-color: #ffffff;
+  }
+  
+  .navbar-brand {
+    width:350px;
+    font-size: 24px;
   }
