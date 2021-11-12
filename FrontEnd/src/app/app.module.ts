@@ -23,6 +23,7 @@ import { PlanPacienteComponent } from './components/nutricionista/plan-paciente/
 import { ListaNutricionistaComponent } from './components/nutricionista/lista-nutricionista/lista-nutricionista.component';
 import { RegistroConsumoComponent } from './components/client/registro-consumo/registro-consumo.component';
 import { ReporteAvanceComponent } from './components/client/reporte-avance/reporte-avance.component';
+import { NutrinavbarComponent } from './components/nutricionista/nutrinavbar/nutrinavbar.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { ReporteAvanceComponent } from './components/client/reporte-avance/repor
     ListaNutricionistaComponent,
     RegistroConsumoComponent,
     ReporteAvanceComponent,
+    NutrinavbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,7 +57,10 @@ import { ReporteAvanceComponent } from './components/client/reporte-avance/repor
       {path: 'singup', component: RegisterComponent}, 
       {path: 'login', component: LoginComponent},
       {path: 'administrador', component:AdministradorComponent },  
-      {path: 'productos', component:ProductosComponent }, 
+      {path: 'productos', component:ProductosComponent}, 
+      {path: 'nutricionista', component:NutricionistaComponent },  
+      {path: 'planes', component:PlanesComponent },  
+      {path: 'client', component:ClientComponent }, 
       { path: '**', redirectTo: 'home', pathMatch: 'full' },
       
     ]),
