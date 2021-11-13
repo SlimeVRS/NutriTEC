@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { MatSelectModule} from '@angular/material/select';
+import { MatTabsModule} from '@angular/material/tabs';
+import { MatCardModule} from '@angular/material/card';
+import {MatInputModule} from '@angular/material/input';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ToastrModule } from 'ngx-toastr';
@@ -24,6 +27,7 @@ import { ListaNutricionistaComponent } from './components/nutricionista/lista-nu
 import { RegistroConsumoComponent } from './components/client/registro-consumo/registro-consumo.component';
 import { ReporteAvanceComponent } from './components/client/reporte-avance/reporte-avance.component';
 import { NutrinavbarComponent } from './components/nutricionista/nutrinavbar/nutrinavbar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -51,6 +55,10 @@ import { NutrinavbarComponent } from './components/nutricionista/nutrinavbar/nut
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    MatSelectModule,
+    MatTabsModule,
+    MatCardModule,
+    MatInputModule,
     ToastrModule.forRoot(),
     RouterModule.forRoot([
       {path: 'home', component: HomeComponent},
@@ -64,6 +72,7 @@ import { NutrinavbarComponent } from './components/nutricionista/nutrinavbar/nut
       { path: '**', redirectTo: 'home', pathMatch: 'full' },
       
     ]),
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

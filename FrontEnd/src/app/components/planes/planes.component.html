@@ -19,72 +19,56 @@
             <h1 class="h3 mb-3 fw-normal">Creacion de Planes</h1>
            
         
-              <a>Plan</a>
-              <label for="inputDescripcion" class="visually-hidden">Desayuno</label>
-              <input id="inputDescripcion" class="form-control" formControlName="breakfast_plan" placeholder="Descripcion del producto" required
-                #DescripcionInput>
-
-            <a>Codigo de Barras</a>
-            <label for="inputBarras" class="visually-hidden">Codigo</label>
-            <input type="number" id="inputBarras" class="form-control" formControlName="id_food" placeholder="Ingrese el Codigo del Producto" required
-            #BarrasInput>
-              
-              
-            <a>Cantidad de Grasa</a>
-            <label for="inputAdult" class="visually-hidden">Cantidad de Grasa</label>
-            <input type="number" id="inputGrasa" class="form-control" formControlName="fat_food"
-              placeholder="Ingrese Cantidad de Grasa(g)" required #GrasatInput>
-
-            <a>Tamaño</a>
-            <label for="inputTamaño" class="visually-hidden">Tamaño</label>
-            <input type="number" id="inputTamaño" class="form-control" formControlName="portion_food"
-              placeholder="Ingrese Tamaño de porcion(g/ml)" required #TamañoInput>
-
-            <a>Cantidad Energia</a>
-            <label for="inputEnergia" class="visually-hidden">Energia</label>
-            <input type="number" id="inputEnergia" class="form-control" formControlName="energy_food"
-              placeholder="Ingrese Energia(Kcal)" required #EnergiaInput>
-
-              
-            <a>Cantidad Carbohidratos</a>
-            <label for="inputCarbohidratos" class="visually-hidden">Carbohidratos</label>
-            <input type="number" id="inputCarbohidratos" class="form-control" formControlName="carbs_food"
-            placeholder="Ingrese Carbohidratos(g)" required #CarbohidratosInput>
-
-            <a>Cantidad Proteina</a>
-            <label for="inputProteina" class="visually-hidden">Proteina</label>
-            <input type="number" id="inputProteina" class="form-control" formControlName="protein_food"
-            placeholder="Ingrese Proteina(g)" required #ProteinaInput>
-
-              
+            <a>Nombre del Plan</a>
+            <label for="inputid_plan" class="visually-hidden">Nombre</label>
+            <input id="inputid_plan" class="form-control" formControlName="id_plan" placeholder="Nombre del Plan" required
+            #id_planInput>
 
             
-            <a>Cantidad Vitaminas</a>
-            <label for="inputVitaminas" class="visually-hidden">Vitaminas</label>
-            <input type="number" id="inputVitaminas" class="form-control" formControlName="vitamins_food"
-            placeholder="Ingrese Vitaminas" required #VitaminasInput>
+           
+            <mat-label>Alimentos Desayuno</mat-label>
+            <mat-select [formControl]="elecciones" multiple class="multipleSelect" >
+              <mat-option  *ngFor="let eleccion of eleccionesLista" [value]="eleccion">{{eleccion}}</mat-option>
+            </mat-select>
 
-            
-            <a>Cantidad Sodio</a>
-            <label for="inputSodio" class="visually-hidden">Sodio</label>
-            <input type="number" id="inputSodio" class="form-control" formControlName="sodium_food"
-            placeholder="Ingrese Sodio(mg)" required #SodioInput>
+            <mat-label>Alimentos Merienda</mat-label>
+            <mat-select [formControl]="elecciones" multiple class="multipleSelect" >
+              <mat-option  *ngFor="let eleccion of eleccionesLista" [value]="eleccion">{{eleccion}}</mat-option>
+            </mat-select>
 
-            <a>Cantidad Calcio</a>
-            <label for="inputCalcio" class="visually-hidden">Calcio</label>
-            <input type="number" id="inputCalcio" class="form-control" formControlName="calcium_food"
-            placeholder="Ingrese Calcio(mg)" required #CalcioInput>
+             
+            <mat-label>Alimentos Almuerzo</mat-label>
+            <mat-select [formControl]="elecciones" multiple class="multipleSelect" >
+              <mat-option  *ngFor="let eleccion of eleccionesLista" [value]="eleccion">{{eleccion}}</mat-option>
+            </mat-select>
 
-            
-            <a>Cantidad Hierro</a>
-            <label for="inputHierro" class="visually-hidden">Hierro</label>
-            <input type="number" id="inputHierro" class="form-control" formControlName="iron_food"
-            placeholder="Ingrese Hierro(mg)" required #HierroInput>
+            <mat-label>Alimentos Merienda Tarde</mat-label>
+            <mat-select [formControl]="elecciones" multiple class="multipleSelect" >
+              <mat-option  *ngFor="let eleccion of eleccionesLista" [value]="eleccion">{{eleccion}}</mat-option>
+            </mat-select>
+
+            <mat-label>Alimentos Cena</mat-label>
+            <mat-select [formControl]="elecciones" multiple class="multipleSelect" >
+              <mat-option  *ngFor="let eleccion of eleccionesLista" [value]="eleccion">{{eleccion}}</mat-option>
+            </mat-select>
+            <h1></h1>
+            <div> 
+              <button class="button btn-sucess btn-lg btn-block" (click)="actualizarCalorias()" >Contabilizar Calorias</button>
+            </div>
               
+            
+            <a>Calorias</a>
+            
+            <label for="inputcalorias" class="visually-hidden">Calorias</label>
+            <input id="inputcalorias" class="form-control" formControlName="calorias" placeholder="Cantidad de Calorias" required
+            #caloriasInput>
+       
+ 
             <h1></h1>
             <!-- (click)="guardarPelicula()" -->
+            
             <div> 
-              <button class="button btn-sucess btn-lg btn-block" >Enviar Producto</button>
+              <button class="button btn-sucess btn-lg btn-block" >Enviar Plan</button>
             </div>
 
         </form>
