@@ -1,1 +1,96 @@
-<p>register works!</p>
+<app-navbar></app-navbar>
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+
+
+  </head>
+  <body class="text-center">
+
+    <main class="form">
+      <form [formGroup]="form">
+        <h1 class="h3 mb-3 fw-normal" style="color: white;">Registro</h1>
+
+        <a style="color: white;">Primer nombre</a>
+        <label for="inputName" class="visually-hidden">Primer nombre</label>
+        <input id="inputName" class="form-control" formControlName="nombre" placeholder="ingrese su primer nombre" required #fnameInput>
+
+        <a style="color: white;">Segundo nombre</a>
+        <label for="inputName" class="visually-hidden">Segundo nombre</label>
+        <input id="inputName" class="form-control" formControlName="nombre2" placeholder="ingrese su segundo nombre" required #snameInput>
+
+        <a style="color: white;">Primer apellido nombre</a>
+        <label for="inputLastName" class="visually-hidden">Primer apellido</label>
+        <input id="inputLastName" class="form-control" formControlName="apellido1" placeholder="ingrese su primer apellido" required #flastnameInput>
+
+        <a style="color: white;">Segundo apellido nombre</a>
+        <label for="inputSLastName" class="visually-hidden">Segundo apellido</label>
+        <input id="inputSLastName" class="form-control" formControlName="apellido2" placeholder="ingrese su segundo apellido" required #slastnameInput>
+
+        <a style="color: white;">Fecha nacimiento</a>
+        <label for="inputCountry" class="visually-hidden">Fecha de nacimiento</label>
+        <input id="inputCountry" class="form-control" formControlName="fechaNacimiento" placeholder="nacimiento (AAAA-MM-DD)" required #BDInput>
+
+        <a style="color: white;">Cédula</a>
+        <label for="inputDireccion" class="visually-hidden">Cedula</label>
+        <input id="inputDireccion" class="form-control" formControlName="cedula" placeholder="ingrese su cedula" required #IDcardInput>
+
+        <a style="color: white;">Peso</a>
+        <label for="inputContinet" class="visually-hidden">Peso</label>
+        <input id="inputContinet" class="form-control" formControlName="Peso" placeholder="ingrese su Peso" required #PesoInput>
+
+        <a style="color: white;">Peso Actual</a>
+        <label for="inputContinet" class="visually-hidden">Peso actual</label>
+        <input id="inputContinet" class="form-control" formControlName="PesoActual" placeholder="ingrese su Peso actual" required #PesoActualInput>
+
+        <a style="color: white;">IMC</a>
+        <label for="inputContinet" class="visually-hidden">IMC</label>
+        <input id="inputContinet" class="form-control" formControlName="IMC" placeholder="ingrese su IMC" required #IMCInput>
+
+        <a style="color: white;">Calorias</a>
+        <label for="inputContinet" class="visually-hidden">Calorias</label>
+        <input id="inputContinet" class="form-control" formControlName="Calorias" placeholder="ingrese Calorias" required #CaloriasInput>
+
+        <a style="color: white;">País</a>
+        <label for="inputContinet" class="visually-hidden">Pais</label>
+        <input id="inputContinet" class="form-control" formControlName="Pais" placeholder="ingrese su Pais de recidencia" required #PaisInput>
+
+        <a style="color: white;">Cintura</a>
+        <label for="inputContinet" class="visually-hidden">Cintura</label>
+        <input id="inputContinet" class="form-control" formControlName="Cintura" placeholder="ingrese Cintura" required #CinturaInput>
+
+        <a style="color: white;">Cuello</a>
+        <label for="inputContinet" class="visually-hidden">Cuello</label>
+        <input id="inputContinet" class="form-control" formControlName="Cuello" placeholder="ingrese Cuello" required #CuelloInput>
+
+        <a style="color: white;">Cadera</a>
+        <label for="inputContinet" class="visually-hidden">Cadera</label>
+        <input id="inputContinet" class="form-control" formControlName="Cadera" placeholder="ingrese Cadera" required #CaderaInput>
+
+        <a style="color: white;">Musculo</a>
+        <label for="inputContinet" class="visually-hidden">Músculo</label>
+        <input id="inputContinet" class="form-control" formControlName="Musculo" placeholder="ingrese Musculo" required #MusculoInput>
+
+        <a style="color: white;">Grasa</a>
+        <label for="inputContinet" class="visually-hidden">Grasa</label>
+        <input id="inputContinet" class="form-control" formControlName="Grasa" placeholder="ingrese Grasa" required #GrasaInput>
+
+        <a style="color: white;">Cosumo diario de calorias </a>
+        <label for="inputContinet" class="visually-hidden">CaloriasDiarias</label>
+        <input id="inputContinet" class="form-control" formControlName="CaloriasDiarias" placeholder="ingrese Cosumo diario de calorias" required #CaloriasDiariasInput>
+
+        <a style="color: white;">Usuario</a>
+        <label for="inputEmail" class="visually-hidden">Usuario</label>
+        <input id="inputEmail" class="form-control" formControlName="usuario" placeholder="ingrese su nombre de usuario" required autofocus #userInput>
+
+        <a style="color: white;">Contraseña</a>
+        <label for="inputPassword" class="visually-hidden">Contraseña</label>
+        <input type="password" id="inputPassword" class="form-control" formControlName="password" placeholder="ingrese su contraseña" required #passwordInput>
+        <!--aquí está el botón -->
+        <button class="button btn-sucess btn-lg btn-block" >Ingresar</button>
+      </form>
+    </main>
+
+  </body>
+</html>
