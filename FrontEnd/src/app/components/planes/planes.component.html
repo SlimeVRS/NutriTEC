@@ -27,29 +27,29 @@
             
            
             <mat-label>Alimentos Desayuno</mat-label>
-            <mat-select [formControl]="elecciones" multiple class="multipleSelect" >
-              <mat-option  *ngFor="let eleccion of eleccionesLista" [value]="eleccion">{{eleccion}}</mat-option>
+            <mat-select class="form-control" formControlName="desayuno" multiple class="multipleSelect" >
+              <mat-option  *ngFor="let eleccion of arrayProductos" [value]="eleccion">{{eleccion}}</mat-option>
             </mat-select>
 
             <mat-label>Alimentos Merienda</mat-label>
-            <mat-select [formControl]="elecciones" multiple class="multipleSelect" >
-              <mat-option  *ngFor="let eleccion of eleccionesLista" [value]="eleccion">{{eleccion}}</mat-option>
+            <mat-select formControlName="merienda" multiple class="multipleSelect" >
+              <mat-option  *ngFor="let eleccion of arrayProductos" [value]="eleccion">{{eleccion}}</mat-option>
             </mat-select>
 
              
             <mat-label>Alimentos Almuerzo</mat-label>
-            <mat-select [formControl]="elecciones" multiple class="multipleSelect" >
-              <mat-option  *ngFor="let eleccion of eleccionesLista" [value]="eleccion">{{eleccion}}</mat-option>
+            <mat-select formControlName="almuerzo" multiple class="multipleSelect" >
+              <mat-option  *ngFor="let eleccion of arrayProductos" [value]="eleccion">{{eleccion}}</mat-option>
             </mat-select>
 
             <mat-label>Alimentos Merienda Tarde</mat-label>
-            <mat-select [formControl]="elecciones" multiple class="multipleSelect" >
-              <mat-option  *ngFor="let eleccion of eleccionesLista" [value]="eleccion">{{eleccion}}</mat-option>
+            <mat-select formControlName="meriendaTarde" id="merienda" multiple class="multipleSelect" >
+              <mat-option  *ngFor="let eleccion of arrayProductos" [value]="eleccion">{{eleccion}}</mat-option>
             </mat-select>
 
             <mat-label>Alimentos Cena</mat-label>
-            <mat-select [formControl]="elecciones" multiple class="multipleSelect" >
-              <mat-option  *ngFor="let eleccion of eleccionesLista" [value]="eleccion">{{eleccion}}</mat-option>
+            <mat-select formControlName="cena" multiple class="multipleSelect" >
+              <mat-option  *ngFor="let eleccion of arrayProductos" [value]="eleccion">{{eleccion}}</mat-option>
             </mat-select>
             <h1></h1>
             <div> 
@@ -58,7 +58,6 @@
               
             
             <a>Calorias</a>
-            
             <label for="inputcalorias" class="visually-hidden">Calorias</label>
             <input id="inputcalorias" class="form-control" formControlName="calorias" placeholder="Cantidad de Calorias" required
             #caloriasInput>
@@ -72,9 +71,9 @@
             </div>
 
         </form>
-        <table id="tabla">
+        <!-- <table id="tabla">
 
-        </table>
+        </table> -->
 
 
       </main>

@@ -8,19 +8,20 @@ import { data } from 'jquery';
   providedIn: 'root'
 })
 export class ProductoService {
-  myAppUrl: 'http://localhost:15451/api/Client';
+  myAppUrl: 'http://localhost:55974/api/food';
   list: productoModel[];
   private actualizarForm = new BehaviorSubject<productoModel>({} as any);
 
   constructor(private http: HttpClient) { }
   guardarProducto(producto: productoModel): Observable<productoModel> {
-    return this.http.post<productoModel>('http://localhost:15451/api/Client', producto);
+    return this.http.post<productoModel>('http://localhost:55974/api/food', producto);
 
   }
 
   obtenerProductos() {
-    this.http.get('http://localhost:15451/api/Client').toPromise().then(data => {
+    this.http.get('http://localhost:55974/api/food').toPromise().then(data => {
       this.list = data as productoModel[];
+      console.log(data);
     }
     );
   }
@@ -28,12 +29,17 @@ export class ProductoService {
     this.actualizarForm.next(producto);
   }
   actualizarProducto(producto: productoModel): Observable<productoModel>{
-    return this.http.put<productoModel>('http://localhost:15451/api/Client',producto);
+    return this.http.put<productoModel>('http://localhost:55974/api/food',producto);
   }
   obtenerProducto(): Observable<productoModel>{
     return this.actualizarForm.asObservable();
   }
   eliminarProducto(id: number): Observable<productoModel>{
-    return this.http.delete<productoModel>('http://localhost:15451/api/Client/'+ id);
+    return this.http.delete<productoModel>('http://localhost:55974/api/food/'+ id);
+  }
+  getHeroes(): Promise<productoModel[]> {
+    return this.http.get('http://localhost:55974/api/food')
+               .toPromise()
+               .then(response => this.list= response as productoModel[]);         
   }
 }

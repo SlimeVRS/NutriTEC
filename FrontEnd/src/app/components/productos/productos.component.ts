@@ -30,7 +30,7 @@ export class ProductosComponent implements OnInit {
       energy_food: ['', [Validators.required, Validators.maxLength(16), Validators.minLength(1)]],
       protein_food: ['', [Validators.required, Validators.maxLength(16), Validators.minLength(1)]],
       food_state: ['', [Validators.required, Validators.maxLength(16), Validators.minLength(1)]],
-
+      iron_food: ['', [Validators.required, Validators.maxLength(16), Validators.minLength(1)]],
     });
   }
 

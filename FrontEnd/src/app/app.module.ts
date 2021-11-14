@@ -28,6 +28,7 @@ import { RegistroConsumoComponent } from './components/client/registro-consumo/r
 import { ReporteAvanceComponent } from './components/client/reporte-avance/reporte-avance.component';
 import { NutrinavbarComponent } from './components/nutricionista/nutrinavbar/nutrinavbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatTabsModule,
     MatCardModule,
     MatInputModule,
+    HttpClientModule,
     ToastrModule.forRoot(),
     RouterModule.forRoot([
       {path: 'home', component: HomeComponent},
@@ -69,6 +71,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       {path: 'nutricionista', component:NutricionistaComponent },  
       {path: 'planes', component:PlanesComponent },  
       {path: 'client', component:ClientComponent }, 
+      {path: 'planPaciente', component:PlanPacienteComponent }, 
       { path: '**', redirectTo: 'home', pathMatch: 'full' },
       
     ]),
