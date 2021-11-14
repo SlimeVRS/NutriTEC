@@ -31,6 +31,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule} from '@angular/common/http';
 import { NavbarClientComponent } from './components/client/navbar-client/navbar-client/navbar-client.component';
 import { GestionRecetasComponent } from './components/client/gestion-recetas/gestion-recetas/gestion-recetas.component';
+import { RegAdminComponent } from './components/home/register/registro-admin/reg-admin/reg-admin.component';
+import { RegNutriComponent } from './components/home/register/registro-nutri/reg-nutri/reg-nutri.component';
+import { NavRegComponent } from './components/home/register/navbar-reg/nav-reg/nav-reg.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,6 +57,9 @@ import { GestionRecetasComponent } from './components/client/gestion-recetas/ges
     NutrinavbarComponent,
     GestionRecetasComponent,
     NavbarClientComponent,
+    RegAdminComponent,
+    RegNutriComponent,
+    NavRegComponent,
   ],
   imports: [
     BrowserModule,
@@ -79,6 +85,9 @@ import { GestionRecetasComponent } from './components/client/gestion-recetas/ges
       {path: 'gestion_recetas', component:GestionRecetasComponent }, 
       {path: 'avance', component:ReporteAvanceComponent },
       {path: 'consumo', component:RegistroConsumoComponent },
+      {path: 'radmin', component:RegAdminComponent }, 
+      {path: 'rclient', component:RegisterComponent },
+      {path: 'rnutri', component:RegNutriComponent },
       { path: '**', redirectTo: 'home', pathMatch: 'full' },
       
     ]),

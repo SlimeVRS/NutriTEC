@@ -1,0 +1,48 @@
+<app-nav-reg></app-nav-reg>
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+
+
+  </head>
+  <body class="text-center">
+
+    <main class="form">
+      <form [formGroup]="form">
+        <h1 class="h3 mb-3 fw-normal" style="color: white;">Registro de administrador</h1>
+
+        <a style="color: white;">Primer nombre</a>
+        <label for="inputName" class="visually-hidden">Primer nombre</label>
+        <input id="inputName" class="form-control" formControlName="nombre" placeholder="ingrese su primer nombre" required #fnameInput>
+
+        <a style="color: white;">Segundo nombre</a>
+        <label for="inputName" class="visually-hidden">Segundo nombre</label>
+        <input id="inputName" class="form-control" formControlName="nombre2" placeholder="ingrese su segundo nombre" required #snameInput>
+
+        <a style="color: white;">Primer apellido nombre</a>
+        <label for="inputLastName" class="visually-hidden">Primer apellido</label>
+        <input id="inputLastName" class="form-control" formControlName="apellido1" placeholder="ingrese su primer apellido" required #flastnameInput>
+
+        <a style="color: white;">Segundo apellido nombre</a>
+        <label for="inputSLastName" class="visually-hidden">Segundo apellido</label>
+        <input id="inputSLastName" class="form-control" formControlName="apellido2" placeholder="ingrese su segundo apellido" required #slastnameInput>
+
+        <a style="color: white;">Teléfono</a>
+        <label for="inputSLastName" class="visually-hidden">Phone</label>
+        <input id="inputSLastName" class="form-control" formControlName="Phone" placeholder="ingrese su teléfono" required #PhoneInput>
+
+        <a style="color: white;">Usuario</a>
+        <label for="inputEmail" class="visually-hidden">Usuario</label>
+        <input id="inputEmail" class="form-control" formControlName="usuario" placeholder="ingrese su nombre de usuario" required autofocus #userInput>
+
+        <a style="color: white;">Contraseña</a>
+        <label for="inputPassword" class="visually-hidden">Contraseña</label>
+        <input type="password" id="inputPassword" class="form-control" formControlName="password" placeholder="ingrese su contraseña" required #passwordInput>
+        <!--aquí está el botón -->
+        <button class="button btn-sucess btn-lg btn-block" >Registrar</button>
+      </form>
+    </main>
+
+  </body>
+</html>
