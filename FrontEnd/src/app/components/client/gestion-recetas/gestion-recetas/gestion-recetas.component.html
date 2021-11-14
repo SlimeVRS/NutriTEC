@@ -1,2 +1,43 @@
 <app-navbar-client></app-navbar-client>
-<p>gestion-recetas works!</p>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+
+
+  </head>
+  <body class="text-center">
+<div class="jumbtrom">
+    <div class="row">
+        <div class="col-md-5">
+            <h6 class="text-center">
+                Crear receta
+            </h6>
+            <!-- (ngSubmit)="guardarEmpleado()" -->
+            <form [formGroup]="form"  >
+                <a style="color: white;">Nombre de la receta</a>
+        <label for="inputContinet" class="visually-hidden">RecetaNombre</label>
+        <input id="inputContinet" class="form-control" formControlName="RecetaNombre" placeholder="ingre el nombre de la receta" required #RecetaNombreInput>
+        <a>&nbsp;&nbsp;</a>
+<!--                <mat-label>Alimentos Desayuno</mat-label>
+            <mat-select class="form-control" formControlName="desayuno" multiple class="multipleSelect" >
+              <mat-option  *ngFor="let eleccion of arrayProductos" [value]="eleccion">{{eleccion}}</mat-option>
+            </mat-select>
+-->
+                <div class="form-group">
+                    <button class="button btn-sucess btn-lg btn-block" [disabled]="form.invalid" type="submit">Crear nueva receta</button>
+                </div>
+                
+            </form>
+        </div>
+
+        <div class="col-md-7">
+            <h6 class="text-center">
+                Productos existentes
+            </h6>
+            <!-- <app-normal-employees-list></app-normal-employees-list> -->
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,2 +1,45 @@
 <app-navbar-client></app-navbar-client>
-<p>reporte-avance works!</p>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+
+
+  </head>
+  <body class="text-center">
+<div class="jumbtrom">
+    <div class="row">
+        <div class="col-md-5">
+            <h6 class="text-center">
+                Reporte de avance
+            </h6>
+            <!-- (ngSubmit)="guardarEmpleado()" -->
+            <form [formGroup]="form"  >
+
+                <a style="color: white;">Fecha inicial del reporte</a>
+                <div class="input-group">
+                    <input type="date" id="date" class="form-control" formControlName="initial_date"  placeholder="Fecha de inición">
+                </div>
+                
+                <a style="color: white;">Fecha final del reporte</a>
+        <div class="input-group">
+            <input type="date" id="date" class="form-control" formControlName="final_date"  placeholder="Fecha de finalización">
+        </div>
+        <a>&nbsp;&nbsp;</a>
+        <button class="button btn-sucess btn-lg btn-block" >Ver Reporte</button>
+        <a>&nbsp;&nbsp;</a>
+        <button class="button btn-sucess btn-lg btn-block" >Generar PDF</button>
+            </form>
+            
+        </div>
+
+        <div class="col-md-7">
+            <h6 class="text-center">
+                Reporte por fechas seleccionadas
+            </h6>
+            <!-- <app-normal-employees-list></app-normal-employees-list> -->
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
