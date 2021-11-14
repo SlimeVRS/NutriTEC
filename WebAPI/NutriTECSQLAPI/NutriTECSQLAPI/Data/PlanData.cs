@@ -18,6 +18,11 @@ namespace NutriTECSQLAPI.Data
                 SqlCommand cmd = new SqlCommand("usp_registernewplan", connection);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@name_plan", plan.name_plan);
+                cmd.Parameters.AddWithValue("@breakfast", plan.breakfast);
+                cmd.Parameters.AddWithValue("@morning_snack", plan.morning_snack);
+                cmd.Parameters.AddWithValue("@lunch", plan.lunch);
+                cmd.Parameters.AddWithValue("@afternoon_snack", plan.afternoon_snack);
+                cmd.Parameters.AddWithValue("@dinner", plan.dinner);
                 try
                 {
                     connection.Open();
@@ -39,6 +44,11 @@ namespace NutriTECSQLAPI.Data
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@id_plan", plan.id_plan);
                 cmd.Parameters.AddWithValue("@name_plan", plan.name_plan);
+                cmd.Parameters.AddWithValue("@breakfast", plan.breakfast);
+                cmd.Parameters.AddWithValue("@morning_snack", plan.morning_snack);
+                cmd.Parameters.AddWithValue("@lunch", plan.lunch);
+                cmd.Parameters.AddWithValue("@afternoon_snack", plan.afternoon_snack);
+                cmd.Parameters.AddWithValue("@dinner", plan.dinner);
                 try
                 {
                     connection.Open();
@@ -70,7 +80,12 @@ namespace NutriTECSQLAPI.Data
                             planList.Add(new Plan()
                             {
                                 id_plan = Convert.ToInt32(dataReader["id_plan"]),
-                                name_plan = dataReader["name_plan"].ToString()
+                                name_plan = dataReader["name_plan"].ToString(),
+                                breakfast = dataReader["breakfast"].ToString(),
+                                morning_snack = dataReader["morning_snack"].ToString(),
+                                lunch = dataReader["lunch"].ToString(),
+                                afternoon_snack = dataReader["afternoon_snack"].ToString(),
+                                dinner = dataReader["dinner"].ToString()
                             });
                         }
                     }
@@ -101,7 +116,12 @@ namespace NutriTECSQLAPI.Data
                             plan = new Plan()
                             {
                                 id_plan = Convert.ToInt32(dataReader["id_plan"]),
-                                name_plan = dataReader["name_plan"].ToString()
+                                name_plan = dataReader["name_plan"].ToString(),
+                                breakfast = dataReader["breakfast"].ToString(),
+                                morning_snack = dataReader["morning_snack"].ToString(),
+                                lunch = dataReader["lunch"].ToString(),
+                                afternoon_snack = dataReader["afternoon_snack"].ToString(),
+                                dinner = dataReader["dinner"].ToString()
                             };
                         }
                     }
