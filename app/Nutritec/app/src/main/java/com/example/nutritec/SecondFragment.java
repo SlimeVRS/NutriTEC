@@ -11,13 +11,25 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.nutritec.databinding.FragmentSecondBinding;
 import com.google.android.material.snackbar.Snackbar;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -30,6 +42,7 @@ public class SecondFragment extends Fragment {
     private ArrayList<String> arr_comidas,arr_tiempos;
     private Spinner spinTiempo,spinComida;
     private boolean F=false,bool_food=F,bool_time=F,add_food=F;
+    private RequestQueue queue;
 
     @Override
     public View onCreateView(
@@ -44,7 +57,7 @@ public class SecondFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        queue = Volley.newRequestQueue(getActivity());
 
         binding.bntReceta.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +69,9 @@ public class SecondFragment extends Fragment {
         binding.start1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                iniciar();
+                pedir_comidas();
+
+                //iniciar();
             }
         });
         EditText editTextBusqueda = getActivity().findViewById(R.id.id_produc_1);
@@ -120,6 +135,37 @@ public class SecondFragment extends Fragment {
 
         });
     }
+    private void pedir_comidas(){
+        String url ="http://localhost:55974/api/food";
+        String url2 ="http://www.google.com";
+        JsonObjectRequest request =new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONArray comidas_arr=response.getJSONArray("ArrayOfFood ");
+                    for(int i=0; i<comidas_arr.length();i++){
+                        JSONObject objetojson= comidas_arr.getJSONObject(i);
+                        String name= objetojson.getString("description_food");
+                        Toast.makeText(getActivity(),name,Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getActivity(),"no funcó",Toast.LENGTH_SHORT).show();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(),"no funcó",Toast.LENGTH_SHORT).show();
+            }
+        });
+        queue.add(request);
+    }
+
+
     private void add_producto(){
         //se llama al api
         //usar food para buscar en el api los datos
