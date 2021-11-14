@@ -214,5 +214,46 @@ namespace NutriTECSQLAPI.Data
                 }
             }
         }
+		
+		public static List<Food> GetFoodsByState(int food_state)
+        {
+            List<Food> foodList = new List<Food>();
+            using (SqlConnection connection = new SqlConnection(Connection.connectionStringSQL))
+            {
+                SqlCommand cmd = new SqlCommand("usp_getfoodsbystate", connection);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@food_state", food_state);
+                try
+                {
+                    connection.Open();
+                    using (SqlDataReader dataReader = cmd.ExecuteReader())
+                    {
+                        while(dataReader.Read())
+                        {
+                            foodList.Add(new Food()
+                            {
+                                id_food = Convert.ToInt32(dataReader["id_food"]),
+                                description_food = dataReader["description_food"].ToString(),
+                                portion_food = dataReader["portion_food"].ToString(),
+                                fat_food = Convert.ToInt32(dataReader["fat_food"]),
+                                vitamins_food = dataReader["vitamins_food"].ToString(),
+                                calcium_food = Convert.ToSingle(dataReader["calcium_food"]),
+                                iron_food = Convert.ToSingle(dataReader["iron_food"]),
+                                sodium_food = Convert.ToSingle(dataReader["sodium_food"]),
+                                carbs_food = Convert.ToSingle(dataReader["carbs_food"]),
+                                energy_food = Convert.ToSingle(dataReader["energy_food"]),
+                                protein_food = Convert.ToSingle(dataReader["protein_food"]),
+                                food_state = Convert.ToInt32(dataReader["food_state"]),
+                            });
+                        }
+                    }
+                    return foodList;
+                }
+                catch
+                {
+                    return foodList;
+                }            
+            }
+        }
     }
 }
