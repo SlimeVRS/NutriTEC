@@ -29,13 +29,10 @@
         <input id="inputSLastName" class="form-control" formControlName="apellido2" placeholder="ingrese su segundo apellido" required #slastnameInput>
 
         <a style="color: white;">Fecha nacimiento</a>
-        <label for="inputCountry" class="visually-hidden">Fecha de nacimiento</label>
-        <input id="inputCountry" class="form-control" formControlName="fechaNacimiento" placeholder="nacimiento (AAAA-MM-DD)" required #BDInput>
-
-        <a style="color: white;">Cédula</a>
-        <label for="inputDireccion" class="visually-hidden">Cedula</label>
-        <input id="inputDireccion" class="form-control" formControlName="cedula" placeholder="ingrese su cedula" required #IDcardInput>
-
+        <div class="input-group">
+            <input type="date" id="date" class="form-control" formControlName="dia_nacimiento"  placeholder="Fecha de de nacimiento">
+        </div>
+        
         <a style="color: white;">Peso</a>
         <label for="inputContinet" class="visually-hidden">Peso</label>
         <input id="inputContinet" class="form-control" formControlName="Peso" placeholder="ingrese su Peso" required #PesoInput>
@@ -88,7 +85,7 @@
         <label for="inputPassword" class="visually-hidden">Contraseña</label>
         <input type="password" id="inputPassword" class="form-control" formControlName="password" placeholder="ingrese su contraseña" required #passwordInput>
         <!--aquí está el botón -->
-        <button class="button btn-sucess btn-lg btn-block" >Ingresar</button>
+        <button class="button btn-sucess btn-lg btn-block" >Registrar</button>
       </form>
     </main>
 

@@ -1,1 +1,41 @@
-<p>registro-consumo works!</p>
+<app-navbar-client></app-navbar-client>
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+
+
+  </head>
+  <body class="text-center">
+
+    <main class="form">
+      <form [formGroup]="form">
+        <h1 class="h3 mb-3 fw-normal" style="color: white;">Registro Consumo Diario</h1>
+        
+        <a style="color: white;">Desayuno</a>
+        <label for="inputName" class="visually-hidden">Desayuno</label>
+        <input id="inputName" class="form-control" formControlName="Cdesayuno" placeholder="ingrese el consumo del desayuno" required #McinturaInput>
+
+        <a style="color: white;">Merienda Mañana</a>
+        <label for="inputName" class="visually-hidden">MeriendaMañana</label>
+        <input id="inputName" class="form-control" formControlName="CMmanana" placeholder="ingrese el consumo de la merienda de la mañana" required #MCuelloInput>
+
+        <a style="color: white;">Almuerzo</a>
+        <label for="inputLastName" class="visually-hidden">Almuerzo</label>
+        <input id="inputLastName" class="form-control" formControlName="Calmuerzo" placeholder="ingrese su medida de caderas" required #MCaderaInput>
+
+        <a style="color: white;">Merieda Tarde</a>
+        <label for="inputSLastName" class="visually-hidden">Merieda Tarde</label>
+        <input id="inputSLastName" class="form-control" formControlName="CMtarde" placeholder="ingrese el consumo de la merienda de la tarde" required #PMusculoInput>
+
+        <a style="color: white;">Cena</a>
+        <label for="inputCountry" class="visually-hidden">Cena</label>
+        <input id="inputCountry" class="form-control" formControlName="Ccena" placeholder="ingreses su consumo de la cena" required #PGrasaInput>
+        <a>&nbsp;&nbsp;</a>
+        <!--aquí está el botón -->
+        <button class="button btn-sucess btn-lg btn-block" >Registrar Medida</button>
+      </form>
+    </main>
+
+  </body>
+</html>

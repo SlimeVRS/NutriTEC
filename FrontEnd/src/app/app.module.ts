@@ -29,7 +29,8 @@ import { ReporteAvanceComponent } from './components/client/reporte-avance/repor
 import { NutrinavbarComponent } from './components/nutricionista/nutrinavbar/nutrinavbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule} from '@angular/common/http';
-
+import { NavbarClientComponent } from './components/client/navbar-client/navbar-client/navbar-client.component';
+import { GestionRecetasComponent } from './components/client/gestion-recetas/gestion-recetas/gestion-recetas.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,6 +52,8 @@ import { HttpClientModule} from '@angular/common/http';
     RegistroConsumoComponent,
     ReporteAvanceComponent,
     NutrinavbarComponent,
+    GestionRecetasComponent,
+    NavbarClientComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,6 +75,10 @@ import { HttpClientModule} from '@angular/common/http';
       {path: 'planes', component:PlanesComponent },  
       {path: 'client', component:ClientComponent }, 
       {path: 'planPaciente', component:PlanPacienteComponent }, 
+      {path: 'medidas', component:MedidasComponent }, 
+      {path: 'gestion_recetas', component:GestionRecetasComponent }, 
+      {path: 'avance', component:ReporteAvanceComponent },
+      {path: 'consumo', component:RegistroConsumoComponent },
       { path: '**', redirectTo: 'home', pathMatch: 'full' },
       
     ]),

@@ -1,1 +1,46 @@
-<p>medidas works!</p>
+<app-navbar-client></app-navbar-client>
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+
+
+  </head>
+  <body class="text-center">
+
+    <main class="form">
+      <form [formGroup]="form">
+        <h1 class="h3 mb-3 fw-normal" style="color: white;">Registrar medidas</h1>
+        
+        <a style="color: white;">Fecha de ingreso de medidas</a>
+        <div class="input-group">
+            <input type="date" id="date" class="form-control" formControlName="dia_medidas"  placeholder="Fecha de ingreso de medidas">
+        </div>
+
+        <a style="color: white;">Medida cintura</a>
+        <label for="inputName" class="visually-hidden">Medida cintura</label>
+        <input id="inputName" class="form-control" formControlName="Mcintura" placeholder="ingrese su medida de cintura" required #McinturaInput>
+
+        <a style="color: white;">Medida cuello</a>
+        <label for="inputName" class="visually-hidden">Medida cuello</label>
+        <input id="inputName" class="form-control" formControlName="Mcuello" placeholder="ingrese su medida de cuello" required #MCuelloInput>
+
+        <a style="color: white;">Medida caderas</a>
+        <label for="inputLastName" class="visually-hidden">Medida caderas</label>
+        <input id="inputLastName" class="form-control" formControlName="Mcadera" placeholder="ingrese su medida de caderas" required #MCaderaInput>
+
+        <a style="color: white;">Porcentaje de músculo</a>
+        <label for="inputSLastName" class="visually-hidden">Porcentaje de músculo</label>
+        <input id="inputSLastName" class="form-control" formControlName="Pmusculo" placeholder="ingrese su porcentaje de músculo" required #PMusculoInput>
+
+        <a style="color: white;">Porcentaje de grasa</a>
+        <label for="inputCountry" class="visually-hidden">Porcentaje de grasa</label>
+        <input id="inputCountry" class="form-control" formControlName="Pgrasa" placeholder="ingreses su porcentaje de grasa" required #PGrasaInput>
+        <a>&nbsp;&nbsp;</a>
+        <!--aquí está el botón -->
+        <button class="button btn-sucess btn-lg btn-block" >Registrar Medida</button>
+      </form>
+    </main>
+
+  </body>
+</html>
