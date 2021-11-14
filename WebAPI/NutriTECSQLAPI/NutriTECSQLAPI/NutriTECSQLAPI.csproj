@@ -96,11 +96,13 @@
     <Compile Include="Controllers\FoodController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\PlanController.cs" />
     <Compile Include="Data\AdminData.cs" />
     <Compile Include="Data\Connection.cs" />
     <Compile Include="Data\FoodData.cs" />
     <Compile Include="Data\NutritionistData.cs" />
     <Compile Include="Data\PatientData.cs" />
+    <Compile Include="Data\PlanData.cs" />
     <Compile Include="Data\UserData.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -109,6 +111,7 @@
     <Compile Include="Models\Food.cs" />
     <Compile Include="Models\Nutritionist.cs" />
     <Compile Include="Models\Patient.cs" />
+    <Compile Include="Models\Plan.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
