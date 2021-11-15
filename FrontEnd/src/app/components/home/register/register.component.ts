@@ -2,7 +2,9 @@ import { LEADING_TRIVIA_CHARS } from '@angular/compiler/src/render3/view/templat
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { clientModel } from 'app/models/clientModel';
+import { userModel } from 'app/models/users';
 import { ClienteService } from 'app/services/client/cliente.service';
+import { UserService } from 'app/services/user/user.service';
 import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-register',
@@ -16,7 +18,7 @@ export class RegisterComponent implements OnInit {
 
   put: Boolean;
 
-  constructor(private formBuilder: FormBuilder, private clientService: ClienteService, private toastr: ToastrService) {
+  constructor(private formBuilder: FormBuilder, private userService: UserService, private clientService: ClienteService, private toastr: ToastrService) {
     this.form = this.formBuilder.group({
       id1: 0,
       cedula:['', [Validators.required, Validators.maxLength(16), Validators.minLength(1)]],
@@ -37,8 +39,9 @@ export class RegisterComponent implements OnInit {
       Muslo: ['', [Validators.required, Validators.maxLength(16), Validators.minLength(1)]],
       Grasa: ['', [Validators.required, Validators.maxLength(16), Validators.minLength(1)]],
       CaloriasDiarias: ['', [Validators.required, Validators.maxLength(16), Validators.minLength(1)]],
-      usuario: ['', [Validators.required, Validators.maxLength(16), Validators.minLength(1)]],
+      username: ['', [Validators.required, Validators.maxLength(16), Validators.minLength(1)]],
       password: ['', [Validators.required, Validators.maxLength(16), Validators.minLength(1)]],
+      email: ['', [Validators.required, Validators.maxLength(16), Validators.minLength(1)]],
     });
   }
 
@@ -97,7 +100,20 @@ export class RegisterComponent implements OnInit {
       thigh_patient: this.form.get('Muslo').value,
       fat_patient: this.form.get('Grasa').value,
       muscle_patient: this.form.get('Musculo').value,
+      id_nutritionist_patient:0,
     }
+    const user: userModel = {
+      username: this.form.get('username').value,
+      password: this.form.get('password').value,
+      email: this.form.get('email').value,
+      user_owner:this.form.get('cedula').value,
+      usertype: 2,
+    }
+    this.userService.guardarProducto(user).subscribe(data => {
+      this.toastr.success('Tarjeta Guardada', 'Agregada Exitosamente');
+      console.log(user);
+      this.form.reset();
+    });
     this.clientService.guardarCliente(cliente).subscribe(data => {
       this.toastr.success('Tarjeta Guardada', 'Agregada Exitosamente');
       this.form.reset();

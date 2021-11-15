@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { planesModel } from 'app/models/planesModel';
 import { PlanService } from 'app/services/planes/plan.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -11,29 +13,32 @@ export class ListaPlanesComponent implements OnInit {
 
   enableEdit = false;
   enableEditIndex = null;
-  constructor(public employeeService: PlanService, public toastr: ToastrService) { }
+  planes:any[];
+  planesArray:any[];
+  planesForm:FormGroup;
+  constructor(public planesService: PlanService, public toastr: ToastrService,private formBuilder: FormBuilder) { }
   ngOnInit(): void {
-    this.employeeService.obtenerPlanes();
+    this.planesService.obtenerPlanes();
+    this.planesArray=[];
+    this.planes=[];
+    this.planesForm = this.formBuilder.group({
+      planesControl: []
+    });
+    this.planesService.obtenerPlanes();
+    this.obtenerPlanes();
   }
-  eliminarTarjeta(id) {
-    if (confirm('Desea eliminar la tarjeta?')) {
-      const index = this.employeeService.list.indexOf(id);
-      this.employeeService.list.splice(index, 1);
-      this.employeeService.eliminarPlan(id).subscribe(data => {
-        this.toastr.warning('Eliminar Exitoso', 'Tarjeta Eliminada');
-
-        this.employeeService.obtenerPlanes();
-      })
-    }
+  obtenerPlanes() {
+    this.planesService.obtenerPlanes();
+    this.planesService.getHeroes().then(data => {
+      this.planes as planesModel[];
+      this.planes = data as planesModel[];
+      for (let director of this.planes) {
+        var nombredirector = director.name_plan;
+        this.planesArray.push(nombredirector);
+      }
+      //  this.populateArray(this.filas,this.columnas);
+      console.log(this.planesArray);
+    });
   }
-  editar(tarjeta) {
-    this.employeeService.actualizar(tarjeta);
-  //   this.employee.put=true;
-  //   console.log(this.employee.put); 
-}
-  enableEditMethod(e, i) {
-    this.enableEdit = true;
-    this.enableEditIndex = i;
-    console.log(i, e);
-  }
+  
 }

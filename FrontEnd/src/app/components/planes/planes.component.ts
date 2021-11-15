@@ -82,6 +82,7 @@ export class PlanesComponent implements OnInit {
       lunch : this.form.get('almuerzo').value.toString(),
       afternoon_snack : this.form.get('meriendaTarde').value.toString(),
       dinner : this.form.get('cena').value.toString(),
+      id_patient_nutritionist:0,
       
     }
     

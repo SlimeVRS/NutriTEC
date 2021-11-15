@@ -11,4 +11,5 @@ export class productoModel{
     energy_food:number;
     protein_food:number;
     food_state:number;
+    
 }

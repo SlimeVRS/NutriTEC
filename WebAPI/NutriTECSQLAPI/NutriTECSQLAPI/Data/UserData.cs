@@ -15,6 +15,11 @@ namespace NutriTECSQLAPI.Data
             using (SqlConnection connection = new SqlConnection(Connection.connectionStringSQL))
             {
                 SqlCommand cmd = new SqlCommand("usp_registernewuser", connection);
+                System.Diagnostics.Debug.WriteLine(user.username);
+                System.Diagnostics.Debug.WriteLine(user.password);
+                System.Diagnostics.Debug.WriteLine(user.email);
+                System.Diagnostics.Debug.WriteLine(user.usertype);
+                System.Diagnostics.Debug.WriteLine(user.user_owner);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@username", user.username);
                 cmd.Parameters.AddWithValue("@password", user.password);

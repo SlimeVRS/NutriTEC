@@ -8,4 +8,5 @@ export class planesModel {
     afternoon_snack: string;
     dinner: string;
     // id_nutritionist_plan: number;
+    id_patient_nutritionist?:number;
 }
