@@ -12,9 +12,13 @@ export class MeasureService {
   private actualizarForm = new BehaviorSubject<medidasModel>({} as any);
 
   constructor(private http: HttpClient) { }
+  
   guardarProducto(producto: medidasModel): Observable<medidasModel> {
     return this.http.post<medidasModel>('http://localhost:55974/api/patient/mymeasures', producto);
+  }
 
+  guardarAsignacionPlan(producto: medidasModel): Observable<medidasModel> {
+    return this.http.post<medidasModel>('http://localhost:55974/api/recipe/addnewrecipe', producto);
   }
 
   obtenerProductos() {

@@ -33,8 +33,9 @@ export class ListaPlanesComponent implements OnInit {
       this.planes as planesModel[];
       this.planes = data as planesModel[];
       for (let director of this.planes) {
-        var nombredirector = director.name_plan;
+        var nombredirector = director.id_plan;
         this.planesArray.push(nombredirector);
+        this.planesArray.push(director.name_plan);
       }
       //  this.populateArray(this.filas,this.columnas);
       console.log(this.planesArray);

@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { userModel } from 'app/models/users';
+import { CuentaActivaService } from 'app/services/almacen/cuenta-activa.service';
 import { UserService } from 'app/services/user/user.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -10,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent implements OnInit {
   
-  constructor(private formBuilder: FormBuilder, private userService: UserService, private toastr: ToastrService) { }
+  constructor(private router: Router,private formBuilder: FormBuilder, private cuentaActivaService: CuentaActivaService, private userService: UserService, private toastr: ToastrService) { }
   form2: FormGroup;
   productos:any[];
   productosArray:any[];
@@ -59,7 +62,21 @@ export class LoginComponent implements OnInit {
       this.tipoUsuario=nombredirector;
       this.id_delUsuario=nombredirector5;
       console.log(nombredirector);
-      console.log(  this.id_delUsuario);
+      this.cuentaActivaService.storeIddeCuentaActiva(this.id_delUsuario);
+      this.cuentaActivaService.storeTipodeCuentaActiva(this.tipoUsuario);
+      console.log(this.id_delUsuario);
+      if(this.tipoUsuario===0){// 0 admin 1 nutri 2 paciente
+        this.router.navigate(['./administrador']); 
+
+      }
+      if(this.tipoUsuario===1){// 0 admin 1 nutri 2 paciente
+        this.router.navigate(['./nutricionista']); 
+
+      }
+      if(this.tipoUsuario===2){// 0 admin 1 nutri 2 paciente
+        this.router.navigate(['./client']); 
+
+      }
     });
   }
 
