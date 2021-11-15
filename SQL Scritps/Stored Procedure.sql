@@ -126,6 +126,15 @@ DROP PROCEDURE usp_deleterecipebyid
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'p' AND name = 'usp_getpatientsbynutritionistid')
 DROP PROCEDURE usp_getpatientsbynutritionistid
 
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'p' AND name = 'usp_registerpatientmeasures')
+DROP PROCEDURE usp_registerpatientmeasures
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'p' AND name = 'usp_modifypatientmeasures')
+DROP PROCEDURE usp_modifypatientmeasures
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'p' AND name = 'usp_getpatientmeasures')
+DROP PROCEDURE usp_getpatientmeasures
+
 GO
 
 -- PROCEDURE FOR REGISTER A NEW USER
@@ -155,7 +164,7 @@ GO
 CREATE PROCEDURE usp_getallusers
 	AS
 	BEGIN
-		SELECT id_user, username, email, usertype FROM users
+		SELECT id_user, username, email, usertype, user_owner FROM users
 	END
 GO
 
@@ -259,7 +268,7 @@ GO
 CREATE PROCEDURE usp_getallfoods
 	AS
 	BEGIN
-		SELECT * FROM foods
+		SELECT * FROM foods WHERE food_state = 0
 	END
 GO
 
@@ -362,7 +371,43 @@ CREATE PROCEDURE usp_registernewpatient(
 GO
 
 -- PROCEDURE FOR UPDATE A PATIENT
-CREATE PROCEDURE usp_modifypatient(
+CREATE PROCEDURE usp_registerpatientmeasures(
+	@date_patient DATE,
+	@waist_patient FLOAT,
+	@neck_patient FLOAT,
+	@hip_patient FLOAT,
+	@fat_patient FLOAT,
+	@muscle_patient FLOAT,
+	@weight_patient FLOAT,
+	@id_patient_owner INT
+	)
+	AS
+	BEGIN
+		INSERT INTO patientmeasures(
+			date_patient,
+			waist_patient,
+			neck_patient,
+			hip_patient,
+			fat_patient,
+			muscle_patient,
+			weight_patient,
+			id_patient_owner
+		)
+		VALUES(
+			@date_patient,
+			@waist_patient,
+			@neck_patient,
+			@hip_patient,
+			@fat_patient,
+			@muscle_patient,
+			@weight_patient,
+			@id_patient_owner
+			)
+	END
+GO
+
+-- PROCEDURE FOR UPDATE A PATIENT
+CREATE PROCEDURE usp_modifypatientmeasures(
 	@id_patient INT,
 	@first_name_patient VARCHAR(255),
 	@second_name_patient VARCHAR(255),
@@ -409,6 +454,14 @@ CREATE PROCEDURE usp_getallpatients
 	AS
 	BEGIN
 		SELECT * FROM patients
+	END
+GO
+
+-- PROCEDURE TO GET PATIENT'S MEASURES
+CREATE PROCEDURE usp_getpatientmeasures(@id_patient_owner INT)
+	AS
+	BEGIN
+		SELECT * FROM patientmeasures WHERE id_patient_owner = @id_patient_owner
 	END
 GO
 
