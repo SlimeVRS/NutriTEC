@@ -74,9 +74,13 @@ public class FirstFragment extends Fragment {
                                         JSONObject usuario=new JSONObject(response);
                                         valid_pass=usuario.getInt("id_User")!=0;
                                         if (valid_pass){
-                                        NavHostFragment.findNavController(FirstFragment.this)
-                                                .navigate(R.id.action_FirstFragment_to_SecondFragment);}
-                                        return;
+                                            NavHostFragment.findNavController(FirstFragment.this)
+                                                    .navigate(R.id.action_FirstFragment_to_SecondFragment);
+                                            return;
+                                        }else{
+                                            Toast.makeText(getActivity(),"Usuario o contraseña invalidos",Toast.LENGTH_SHORT).show();
+                                        }
+
                                     } catch (JSONException  e) {
                                         e.printStackTrace();
                                     }
