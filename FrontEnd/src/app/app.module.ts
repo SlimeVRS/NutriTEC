@@ -97,7 +97,7 @@ import { TablapacientesComponent } from './components/nutricionista/tablapacient
       {path: 'radmin', component:RegAdminComponent }, 
       {path: 'rclient', component:RegisterComponent },
       {path: 'rnutri', component:RegNutriComponent },
-      { path: '**', redirectTo: 'home', pathMatch: 'full' },
+      { path: '**', redirectTo: 'login', pathMatch: 'full' },
       
     ]),
     BrowserAnimationsModule,

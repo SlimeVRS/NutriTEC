@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { medidasModel } from 'app/models/medidas';
+import { CuentaActivaService } from 'app/services/almacen/cuenta-activa.service';
 import { MeasureService } from 'app/services/measures/measure.service';
 import { ToastrService } from 'ngx-toastr';
 @Component({
@@ -15,7 +16,7 @@ export class MedidasComponent implements OnInit {
 
   put: Boolean;
 
-  constructor(private formBuilder: FormBuilder, private userService: MeasureService, private toastr: ToastrService) {
+  constructor(private cuentaActiva:CuentaActivaService,private formBuilder: FormBuilder, private userService: MeasureService, private toastr: ToastrService) {
     this.form = this.formBuilder.group({
      
       cedula: ['', [Validators.required, Validators.maxLength(16), Validators.minLength(1)]],
@@ -55,7 +56,7 @@ export class MedidasComponent implements OnInit {
   }
   agregar() {
     const cliente: medidasModel = {
-      id_patient_owner: 32561261,
+      id_patient_owner: this.cuentaActiva.IdCuenta,
       actual_weight_patient: this.form.get('Pmusculo').value,
       hip_patient: this.form.get('Mcadera').value,
       neck_patient: this.form.get('Mcuello').value,
