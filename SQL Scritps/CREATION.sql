@@ -89,7 +89,12 @@ CREATE TABLE nutritionists (
 );
 
 CREATE TABLE food_plan(
-	id_plan INT NOT NULL,
+	id_plan INT NOT NULL IDENTITY(1,1),
 	name_plan VARCHAR(255) NOT NULL,
+	breakfast VARCHAR(255) NOT NULL,
+	morning_snack VARCHAR(255) NOT NULL,
+	lunch VARCHAR(255) NOT NULL,
+	afternoon_snack VARCHAR(255) NOT NULL,
+	dinner VARCHAR(255) NOT NULL
 	PRIMARY KEY(id_plan)
 );
