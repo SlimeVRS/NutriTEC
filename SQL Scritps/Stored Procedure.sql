@@ -142,7 +142,7 @@ CREATE PROCEDURE usp_registernewuser(@username VARCHAR(255), @password VARCHAR(2
 	AS
 	BEGIN
 		INSERT INTO users(username,password,email, usertype, user_owner)
-		VALUES(@username,@password,@email,@usertype,@user_owner)
+		VALUES(@username, CONVERT(VARCHAR(100), HashBytes('MD5', @password), 2),@email,@usertype,@user_owner)
 	END
 GO
 
@@ -150,6 +150,7 @@ GO
 CREATE PROCEDURE usp_modifyuser(@id_user INT, @username VARCHAR(255), @password VARCHAR(255), @email VARCHAR(255), @usertype INT, @user_owner INT)
 	AS
 	BEGIN
+
 		UPDATE users SET 
 			username = @username,
 			password = @password,
@@ -181,8 +182,10 @@ GO
 CREATE PROCEDURE usp_getuserbynamepasswordemail(@username VARCHAR(100),@password VARCHAR(100))
 	AS
 	BEGIN
+		DECLARE @compare_password as VARCHAR(100)
+		SELECT @compare_password = CONVERT(VARCHAR(100), HashBytes('MD5', @password), 2)
 		SELECT id_user, username, email, usertype, user_owner FROM users
-		WHERE username = @username AND password = @password
+		WHERE username = @username AND password = @compare_password
 	END
 
 GO

@@ -91,6 +91,19 @@ CREATE TABLE recipes(
 	PRIMARY KEY (id_recipe)
 );
 
+CREATE TABLE patientmeasures(
+	id_patientM INT NOT NULL IDENTITY(1,1),
+	date_patient DATE NOT NULL,
+	waist_patient FLOAT NOT NULL,
+	neck_patient FLOAT NOT NULL,
+	hip_patient FLOAT NOT NULL,
+	fat_patient FLOAT NOT NULL,
+	muscle_patient FLOAT NOT NULL,
+	weight_patient FLOAT NOT NULL,
+	id_patient_owner INT NOT NULL,
+	PRIMARY KEY (id_patientM)
+);
+
 CREATE TABLE nutritionist_patients(
 	id_nutritionist INT NOT NULL,
 	id_patient INT NOT NULL
@@ -100,6 +113,19 @@ CREATE TABLE patients_recipes(
 	id_recipe INT NOT NULL,
 	id_patient INT NOT NULL
 );
+
+ALTER TABLE users
+DROP CONSTRAINT FK_users_patients
+
+ALTER TABLE users
+DROP CONSTRAINT FK_users_admins
+
+ALTER TABLE users
+DROP CONSTRAINT FK_users_nutritionists
+
+ALTER TABLE patientmeasures
+ADD CONSTRAINT patientmeasures_patient
+FOREIGN KEY(id_patient_owner) REFERENCES patients(id_patient)
 
 ALTER TABLE patients
 ADD CONSTRAINT FK_patients_nutritionists
@@ -112,18 +138,6 @@ FOREIGN KEY(id_patient_nutritionist) REFERENCES patients(id_patient);
 ALTER TABLE recipes
 ADD CONSTRAINT FK_recipes_patients
 FOREIGN KEY(id_patient_recipe) REFERENCES patients(id_patient);
-
-ALTER TABLE users
-ADD CONSTRAINT FK_users_patients
-FOREIGN KEY(user_owner) REFERENCES patients(id_patient);
-
-ALTER TABLE users
-ADD CONSTRAINT FK_users_admins
-FOREIGN KEY(user_owner) REFERENCES admins(id_admin);
-
-ALTER TABLE users
-ADD CONSTRAINT FK_users_nutritionists
-FOREIGN KEY(user_owner) REFERENCES nutritionists(id_nutritionist);
 
 ALTER TABLE nutritionist_patients
 ADD CONSTRAINT FK_1N_nutritionist_patients
