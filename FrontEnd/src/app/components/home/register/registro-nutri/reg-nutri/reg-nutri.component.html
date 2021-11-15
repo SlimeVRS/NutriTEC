@@ -1,69 +1,99 @@
 <app-nav-reg></app-nav-reg>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta charset="utf-8" />
+
+<head>
+  <meta charset="utf-8" />
 
 
-  </head>
-  <body class="text-center">
+</head>
 
-    <main class="form">
-      <form [formGroup]="form">
-        <h1 class="h3 mb-3 fw-normal" style="color: white;">Registro de Nutricionista</h1>
+<body class="text-center">
+
+  <main class="form">
+    <form [formGroup]="form">
+      <h1 class="h3 mb-3 fw-normal" style="color: white;">Registro de Nutricionista</h1>
+
+      <a style="color: white;">Cedula</a>
+        <label for="inputName" class="visually-hidden">Cedula</label>
+        <input id="inputName" class="form-control" formControlName="Cedula" placeholder="ingrese su Cedula" required
+          #fnameInput>
 
         <a style="color: white;">Primer nombre</a>
         <label for="inputName" class="visually-hidden">Primer nombre</label>
-        <input id="inputName" class="form-control" formControlName="nombre" placeholder="ingrese su primer nombre" required #fnameInput>
+        <input id="inputName" class="form-control" formControlName="nombre" placeholder="ingrese su primer nombre"
+          required #fnameInput>
 
         <a style="color: white;">Segundo nombre</a>
         <label for="inputName" class="visually-hidden">Segundo nombre</label>
-        <input id="inputName" class="form-control" formControlName="nombre2" placeholder="ingrese su segundo nombre" required #snameInput>
+        <input id="inputName" class="form-control" formControlName="nombre2" placeholder="ingrese su segundo nombre"
+          required #snameInput>
 
         <a style="color: white;">Primer apellido nombre</a>
         <label for="inputLastName" class="visually-hidden">Primer apellido</label>
-        <input id="inputLastName" class="form-control" formControlName="apellido1" placeholder="ingrese su primer apellido" required #flastnameInput>
+        <input id="inputLastName" class="form-control" formControlName="apellido1"
+          placeholder="ingrese su primer apellido" required #flastnameInput>
 
         <a style="color: white;">Segundo apellido nombre</a>
         <label for="inputSLastName" class="visually-hidden">Segundo apellido</label>
-        <input id="inputSLastName" class="form-control" formControlName="apellido2" placeholder="ingrese su segundo apellido" required #slastnameInput>
+        <input id="inputSLastName" class="form-control" formControlName="apellido2"
+          placeholder="ingrese su segundo apellido" required #slastnameInput>
 
         <a style="color: white;">Fecha nacimiento</a>
         <div class="input-group">
-            <input type="date" id="date" class="form-control" formControlName="dia_nacimiento"  placeholder="Fecha de de nacimiento">
+          <input type="date" id="date" class="form-control" formControlName="dia_nacimiento"
+            placeholder="Fecha de de nacimiento">
         </div>
-        
+
         <a style="color: white;">Peso</a>
         <label for="inputContinet" class="visually-hidden">Peso</label>
-        <input id="inputContinet" class="form-control" formControlName="Peso" placeholder="ingrese su Peso" required #PesoInput>
+        <input id="inputContinet" class="form-control" formControlName="Peso" placeholder="ingrese su Peso" required
+          #PesoInput>
 
         <a style="color: white;">IMC</a>
         <label for="inputContinet" class="visually-hidden">IMC</label>
-        <input id="inputContinet" class="form-control" formControlName="IMC" placeholder="ingrese su IMC" required #IMCInput>
+        <input id="inputContinet" class="form-control" formControlName="IMC" placeholder="ingrese su IMC" required
+          #IMCInput>
 
         <a style="color: white;">Dirección</a>
         <label for="inputContinet" class="visually-hidden">Direccion</label>
-        <input id="inputContinet" class="form-control" formControlName="Direccion" placeholder="ingrese su Dirección" required #DireccionInput>
+        <input id="inputContinet" class="form-control" formControlName="Direccion" placeholder="ingrese su Dirección"
+          required #DireccionInput>
 
         <a style="color: white;">Núemro de tarjerta de crédito</a>
         <label for="inputContinet" class="visually-hidden">NutriCard</label>
-        <input id="inputContinet" class="form-control" formControlName="NutriCard" placeholder="ingrese su número de tarjeta" required #NutriCardInput>
+        <input id="inputContinet" class="form-control" formControlName="NutriCard"
+          placeholder="ingrese su número de tarjeta" required #NutriCardInput>
 
         <a style="color: white;">Tipo de cobro</a>
         <label for="inputContinet" class="visually-hidden">TipoCobro</label>
-        <input id="inputContinet" class="form-control" formControlName="TipoCobro" placeholder="ingrese el tipo de cobro que desea" required #TipoCobroInput>
+        <input id="inputContinet" class="form-control" formControlName="TipoCobro"
+          placeholder="ingrese el tipo de cobro que desea" required #TipoCobroInput>
 
-        <a style="color: white;">Usuario</a>
+        <a style="color: white;">Codigo Nutricionista</a>
+        <label for="inputContinet" class="visually-hidden">Codigo</label>
+        <input id="inputContinet" class="form-control" formControlName="CodigoNutri"
+          placeholder="ingrese el tipo de cobro que desea" required #TipoCobroInput>
+
+             <a style="color: white;">Usuario</a>
         <label for="inputEmail" class="visually-hidden">Usuario</label>
-        <input id="inputEmail" class="form-control" formControlName="usuario" placeholder="ingrese su nombre de usuario" required autofocus #userInput>
+        <input id="inputEmail" class="form-control" formControlName="usuario" placeholder="ingrese su nombre de usuario"
+          required autofocus #userInput>
 
         <a style="color: white;">Contraseña</a>
         <label for="inputPassword" class="visually-hidden">Contraseña</label>
-        <input type="password" id="inputPassword" class="form-control" formControlName="password" placeholder="ingrese su contraseña" required #passwordInput>
-        <!--aquí está el botón -->
-        <button class="button btn-sucess btn-lg btn-block" >Registrar</button>
-      </form>
-    </main>
+        <input type="password" id="inputPassword" class="form-control" formControlName="password"
+          placeholder="ingrese su contraseña" required #passwordInput>
 
-  </body>
+        <a style="color: white;">Email</a>
+        <label for="inputPassword" class="visually-hidden">Email</label>
+        <input type="password" id="inputPassword" class="form-control" formControlName="email"
+          placeholder="ingrese su email" required #passwordInput>
+
+        <button class="button btn-sucess btn-lg btn-block" (click)="agregar()">Registrar</button>
+    </form>
+  </main>
+
+</body>
+
 </html>

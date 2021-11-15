@@ -75,10 +75,11 @@ export class ProductosComponent implements OnInit {
       carbs_food: this.form.get('carbs_food').value,
       energy_food: this.form.get('energy_food').value,
       protein_food: this.form.get('protein_food').value,
-      food_state: this.form.get('food_state').value,
+      food_state: 1,
       iron_food: this.form.get('iron_food').value,
     }
     this.clientService.guardarProducto(cliente).subscribe(data => {
+      console.log(data);
       this.toastr.success('Producto Guardado', 'Enviado Exitosamente');
       this.form.reset();
     });

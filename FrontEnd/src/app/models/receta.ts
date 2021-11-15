@@ -1,5 +1,7 @@
 export class planesModel {
-    iid_recipe: number;
+    id_recipe: number;
     name_recipe: string;
-    patient_id_recipe: number;
+    ingredients:string;
+    id_patient_recipe: number;
+
 }

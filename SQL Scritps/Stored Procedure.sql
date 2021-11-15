@@ -87,26 +87,66 @@ DROP PROCEDURE usp_getnutritionistbyid
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'p' AND name = 'usp_deletenutritionistbyid')
 DROP PROCEDURE usp_deletenutritionistbyid
 
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'p' AND name = 'usp_registernewplan')
+DROP PROCEDURE usp_registernewplan
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'p' AND name = 'usp_modifyfoodplan')
+DROP PROCEDURE usp_modifyfoodplan
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'p' AND name = 'usp_getallfoodplans')
+DROP PROCEDURE usp_getallfoodplans
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'p' AND name = 'usp_getplanbyid')
+DROP PROCEDURE usp_getplanbyid
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'p' AND name = 'usp_deleteplanbyid')
+DROP PROCEDURE usp_deleteplanbyid
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'p' AND name = 'usp_getfoodsbystate')
+DROP PROCEDURE usp_getfoodsbystate
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'p' AND name = 'usp_registernewrecipe')
+DROP PROCEDURE usp_registernewrecipe
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'p' AND name = 'usp_modifyrecipe')
+DROP PROCEDURE usp_modifyrecipe
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'p' AND name = 'usp_getallrecipes')
+DROP PROCEDURE usp_getallrecipes
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'p' AND name = 'usp_getrecipebyid')
+DROP PROCEDURE usp_getrecipebyid
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'p' AND name = 'usp_getrecipebypatientid')
+DROP PROCEDURE usp_getrecipebypatientid
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'p' AND name = 'usp_deleterecipebyid')
+DROP PROCEDURE usp_deleterecipebyid
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'p' AND name = 'usp_getpatientsbynutritionistid')
+DROP PROCEDURE usp_getpatientsbynutritionistid
+
 GO
 
 -- PROCEDURE FOR REGISTER A NEW USER
-CREATE PROCEDURE usp_registernewuser(@username VARCHAR(255), @password VARCHAR(255), @email VARCHAR(255), @usertype INT)
+CREATE PROCEDURE usp_registernewuser(@username VARCHAR(255), @password VARCHAR(255), @email VARCHAR(255), @usertype INT, @user_owner INT)
 	AS
 	BEGIN
-		INSERT INTO users(username,password,email, usertype)
-		VALUES(@username,@password,@email,@usertype)
+		INSERT INTO users(username,password,email, usertype, user_owner)
+		VALUES(@username,@password,@email,@usertype,@user_owner)
 	END
 GO
 
 -- PROCEDURE FOR UPDATE AN USER
-CREATE PROCEDURE usp_modifyuser(@id_user INT, @username VARCHAR(255), @password VARCHAR(255), @email VARCHAR(255), @usertype INT)
+CREATE PROCEDURE usp_modifyuser(@id_user INT, @username VARCHAR(255), @password VARCHAR(255), @email VARCHAR(255), @usertype INT, @user_owner INT)
 	AS
 	BEGIN
 		UPDATE users SET 
 			username = @username,
 			password = @password,
 			email = @email,
-			usertype = @usertype
+			usertype = @usertype,
+			user_owner = @user_owner
 		WHERE id_user = @id_user
 	END
 GO
@@ -238,10 +278,17 @@ CREATE PROCEDURE usp_getfoodsbyname(@description_food VARCHAR(100))
 	BEGIN
 		SELECT * FROM foods WHERE description_food = @description_food
 	END
-
 GO
 
--- PROCEDURE TO DELETE AN ESPECIFIC USER
+-- PROCEDURE TO GET AN ESPECIFIC FOOD BY ITS STATE
+CREATE PROCEDURE usp_getfoodsbystate(@food_state INT)
+	AS
+	BEGIN
+		SELECT * FROM foods WHERE food_state = @food_state
+	END
+GO
+
+-- PROCEDURE TO DELETE AN ESPECIFIC FOOD
 CREATE PROCEDURE usp_deletefoodbyid(@id_food int)
 	AS
 	BEGIN
@@ -266,7 +313,8 @@ CREATE PROCEDURE usp_registernewpatient(
 	@neck_patient FLOAT,
 	@hip_patient FLOAT,
 	@thigh_patient FLOAT,
-	@fat_patient FLOAT
+	@fat_patient FLOAT,
+	@id_nutritionist_patient INT
 	)
 	AS
 	BEGIN
@@ -286,7 +334,8 @@ CREATE PROCEDURE usp_registernewpatient(
 			neck_patient,
 			hip_patient,
 			thigh_patient,
-			fat_patient
+			fat_patient,
+			id_nutritionist_patient
 		)
 		VALUES(
 			@id_patient,
@@ -304,8 +353,11 @@ CREATE PROCEDURE usp_registernewpatient(
 			@neck_patient,
 			@hip_patient,
 			@thigh_patient,
-			@fat_patient
+			@fat_patient,
+			@id_nutritionist_patient
 			)
+		INSERT INTO nutritionist_patients(id_nutritionist, id_patient)
+		VALUES(@id_nutritionist_patient, @id_patient)
 	END
 GO
 
@@ -326,7 +378,8 @@ CREATE PROCEDURE usp_modifypatient(
 	@neck_patient FLOAT,
 	@hip_patient FLOAT,
 	@thigh_patient FLOAT,
-	@fat_patient FLOAT)
+	@fat_patient FLOAT,
+	@id_nutritionist_patient INT)
 	AS
 	BEGIN
 		UPDATE patients SET
@@ -345,7 +398,8 @@ CREATE PROCEDURE usp_modifypatient(
 			neck_patient = @neck_patient,
 			hip_patient = @hip_patient,
 			thigh_patient = @thigh_patient,
-			fat_patient = @fat_patient
+			fat_patient = @fat_patient,
+			id_nutritionist_patient = @id_nutritionist_patient
 		WHERE id_patient = @id_patient
 	END
 GO
@@ -555,5 +609,139 @@ CREATE PROCEDURE usp_deletenutritionistbyid(@id_nutritionist int)
 	AS
 	BEGIN
 		DELETE FROM nutritionists WHERE id_nutritionist = @id_nutritionist
+	END
+GO
+
+-- PROCEDURE TO GET ALL PATIENTS FROM A NUTRITONIST
+CREATE PROCEDURE usp_getpatientsbynutritionistid(@id_nutritionist INT)
+	AS
+	BEGIN
+		SELECT * FROM nutritionist_patients WHERE id_nutritionist = @id_nutritionist
+	END
+GO
+
+-- PROCEDURE FOR REGISTER A NEW PLAN
+CREATE PROCEDURE usp_registernewplan(
+	@name_plan VARCHAR(255),
+	@breakfast VARCHAR(255),
+	@morning_snack VARCHAR(255),
+	@lunch VARCHAR(255),
+	@afternoon_snack VARCHAR(255),
+	@dinner VARCHAR(255),
+	@id_patient_nutritionist INT)
+	AS
+	BEGIN
+		INSERT INTO food_plan(name_plan, breakfast, morning_snack, lunch, afternoon_snack, dinner, id_patient_nutritionist)
+		VALUES(@name_plan, @breakfast, @morning_snack,@lunch, @afternoon_snack, @dinner, @id_patient_nutritionist)
+	END
+GO
+
+-- PROCEDURE FOR UPDATE A NUTRITIONIST
+CREATE PROCEDURE usp_modifyfoodplan(
+	@id_plan INT,
+	@name_plan VARCHAR(255),
+	@breakfast VARCHAR(255),
+	@morning_snack VARCHAR(255),
+	@lunch VARCHAR(255),
+	@afternoon_snack VARCHAR(255),
+	@dinner VARCHAR(255),
+	@id_patient_nutritionist INT
+	)
+	AS
+	BEGIN
+		UPDATE food_plan SET 
+			name_plan = @name_plan,
+			breakfast = @breakfast,
+			morning_snack = @morning_snack,
+			lunch = @lunch,
+			afternoon_snack = @afternoon_snack,
+			dinner = @dinner,
+			id_patient_nutritionist = @id_patient_nutritionist
+		WHERE id_plan = @id_plan
+	END
+GO
+-- PROCEDURE TO GET ALL NUTRITIONISTS
+CREATE PROCEDURE usp_getallfoodplans
+	AS
+	BEGIN
+		SELECT * FROM food_plan
+	END
+GO
+
+-- PROCEDURE TO GET AN ESPECIFIC USER
+CREATE PROCEDURE usp_getplanbyid(@id_plan int)
+	AS
+	BEGIN
+		SELECT * FROM food_plan
+		WHERE id_plan = @id_plan
+	END
+GO
+
+-- PROCEDURE TO DELETE AN ESPECIFIC USER
+CREATE PROCEDURE usp_deleteplanbyid(@id_plan int)
+	AS
+	BEGIN
+		DELETE FROM food_plan WHERE id_plan = @id_plan
+	END
+GO
+
+
+-- PROCEDURE FOR REGISTER A NEW RECIPE
+CREATE PROCEDURE usp_registernewrecipe(@name_recipe VARCHAR(255), @ingredients VARCHAR(max), @id_patient_recipe INT)
+	AS
+	BEGIN
+		INSERT INTO recipes(name_recipe, ingredients, id_patient_recipe)
+		VALUES(@name_recipe, @ingredients, @id_patient_recipe)
+
+		DECLARE @id_recipe AS INT
+		SELECT 'recipes'
+		SELECT @id_recipe = SCOPE_IDENTITY()
+
+		INSERT INTO patients_recipes(id_patient, id_recipe)
+		VALUES(@id_patient_recipe, @id_recipe)
+	END
+GO
+
+-- PROCEDURE FOR UPDATE A RECIPE
+CREATE PROCEDURE usp_modifyrecipe(@id_recipe INT, @name_recipe VARCHAR(255), @ingredients VARCHAR(max), @id_patient_recipe INT)
+	AS
+	BEGIN
+		UPDATE recipes SET 
+			name_recipe = @name_recipe,
+			ingredients = @ingredients,
+			id_patient_recipe = @id_patient_recipe
+		WHERE id_recipe = @id_recipe
+	END
+GO
+
+-- PROCEDURE TO GET ALL RECIPES
+CREATE PROCEDURE usp_getallrecipes
+	AS
+	BEGIN
+		SELECT * FROM recipes
+	END
+GO
+
+-- PROCEDURE TO GET AN ESPECIFIC USER
+CREATE PROCEDURE usp_getrecipebyid(@id_recipe INT)
+	AS
+	BEGIN
+		SELECT name_recipe, ingredients FROM recipes WHERE id_recipe = @id_recipe
+	END
+GO
+
+-- PROCEDURE TO GET AN ESPECIFIC RECIPE
+CREATE PROCEDURE usp_getrecipebypatientid(@id_patient int)
+	AS
+	BEGIN
+		SELECT name_recipe, ingredients FROM recipes WHERE id_patient_recipe = @id_patient
+	END
+GO
+
+-- PROCEDURE TO DELETE AN ESPECIFIC RECIPE
+CREATE PROCEDURE usp_deleterecipebyid(@id_recipe int)
+	AS
+	BEGIN
+		DELETE FROM recipes WHERE id_recipe = @id_recipe
 	END
 GO

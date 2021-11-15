@@ -1,1 +1,40 @@
-<p>lista-nutricionista works!</p>
+
+<app-nutrinavbar></app-nutrinavbar>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+
+
+  </head>
+  <body class="text-center">
+<div class="jumbtrom">
+    <div class="row">
+        <div class="col-md-5">
+            <h6 class="text-center" style="font-size: medium;">
+                Pacientes
+            </h6>
+            
+            <form [formGroup]="productosForm">
+              <select formControlName="directoresx" id="inputDirector">
+                <option [value]='director' *ngFor="let director of productosArray">{{director}}</option>
+              </select>
+            </form>
+            <!-- (ngSubmit)="guardarEmpleado()" -->
+           
+        </div>
+
+        <div class="col-md-7">
+            <h6 class="text-center" style="font-size: medium;">
+                Planes
+            </h6>
+            <app-tablapacientes></app-tablapacientes>
+        </div>
+        <h1></h1>
+        <div class="form-group">
+            <button class="button btn-sucess btn-lg btn-block" [disabled]="productosForm.invalid" type="submit">Aceptar</button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

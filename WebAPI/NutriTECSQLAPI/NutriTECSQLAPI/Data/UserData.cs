@@ -15,11 +15,17 @@ namespace NutriTECSQLAPI.Data
             using (SqlConnection connection = new SqlConnection(Connection.connectionStringSQL))
             {
                 SqlCommand cmd = new SqlCommand("usp_registernewuser", connection);
+                System.Diagnostics.Debug.WriteLine(user.username);
+                System.Diagnostics.Debug.WriteLine(user.password);
+                System.Diagnostics.Debug.WriteLine(user.email);
+                System.Diagnostics.Debug.WriteLine(user.usertype);
+                System.Diagnostics.Debug.WriteLine(user.user_owner);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@username", user.username);
                 cmd.Parameters.AddWithValue("@password", user.password);
                 cmd.Parameters.AddWithValue("@email", user.email);
                 cmd.Parameters.AddWithValue("@usertype", user.usertype);
+                cmd.Parameters.AddWithValue("@user_owner", user.user_owner);
                 try
                 {
                     connection.Open();
@@ -44,6 +50,7 @@ namespace NutriTECSQLAPI.Data
                 cmd.Parameters.AddWithValue("@password", user.password);
                 cmd.Parameters.AddWithValue("@email", user.email);
                 cmd.Parameters.AddWithValue("@usertype", user.usertype);
+                cmd.Parameters.AddWithValue("@user_owner", user.user_owner);
                 try
                 {
                     connection.Open();
@@ -79,7 +86,8 @@ namespace NutriTECSQLAPI.Data
                                 username = dataReader["username"].ToString(),
                                 // password = dataReader["password"].ToString(),
                                 email = dataReader["email"].ToString(),
-                                usertype = Convert.ToInt32(dataReader["usertype"])
+                                usertype = Convert.ToInt32(dataReader["usertype"]),
+                                user_owner = Convert.ToInt32(dataReader["user_owner"])
                             });
                         }
                     }
@@ -151,7 +159,8 @@ namespace NutriTECSQLAPI.Data
                                 username = dataReader["username"].ToString(),
                                 // password = dataReader["password"].ToString(),
                                 email = dataReader["email"].ToString(),
-                                usertype = Convert.ToInt32(dataReader["usertype"])
+                                usertype = Convert.ToInt32(dataReader["usertype"]),
+                                user_owner = Convert.ToInt32(dataReader["user_owner"])
                             };
                         }
                     }

@@ -38,6 +38,18 @@ namespace NutriTECSQLAPI
                     email = RouteParameter.Optional
                 }
             );
+
+            config.Routes.MapHttpRoute(
+                name: "FoodStateParameter",
+                routeTemplate: "api/food/unchecked/{food_state}",
+                defaults: new { food_state = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "FoodPatientParameter",
+                routeTemplate: "api/recipe/myrecipes/{id_patient}",
+                defaults: new { id_patient = RouteParameter.Optional }
+            );
         }
     }
 }

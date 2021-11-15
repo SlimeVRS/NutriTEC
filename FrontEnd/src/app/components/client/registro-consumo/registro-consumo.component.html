@@ -1,41 +1,79 @@
 <app-navbar-client></app-navbar-client>
-<!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
   <head>
     <meta charset="utf-8" />
-
-
+  
+  
   </head>
+  
   <body class="text-center">
-
-    <main class="form">
-      <form [formGroup]="form">
-        <h1 class="h3 mb-3 fw-normal" style="color: white;">Registro Consumo Diario</h1>
-        
-        <a style="color: white;">Desayuno</a>
-        <label for="inputName" class="visually-hidden">Desayuno</label>
-        <input id="inputName" class="form-control" formControlName="Cdesayuno" placeholder="ingrese el consumo del desayuno" required #McinturaInput>
-
-        <a style="color: white;">Merienda Mañana</a>
-        <label for="inputName" class="visually-hidden">MeriendaMañana</label>
-        <input id="inputName" class="form-control" formControlName="CMmanana" placeholder="ingrese el consumo de la merienda de la mañana" required #MCuelloInput>
-
-        <a style="color: white;">Almuerzo</a>
-        <label for="inputLastName" class="visually-hidden">Almuerzo</label>
-        <input id="inputLastName" class="form-control" formControlName="Calmuerzo" placeholder="ingrese su medida de caderas" required #MCaderaInput>
-
-        <a style="color: white;">Merieda Tarde</a>
-        <label for="inputSLastName" class="visually-hidden">Merieda Tarde</label>
-        <input id="inputSLastName" class="form-control" formControlName="CMtarde" placeholder="ingrese el consumo de la merienda de la tarde" required #PMusculoInput>
-
-        <a style="color: white;">Cena</a>
-        <label for="inputCountry" class="visually-hidden">Cena</label>
-        <input id="inputCountry" class="form-control" formControlName="Ccena" placeholder="ingreses su consumo de la cena" required #PGrasaInput>
-        <a>&nbsp;&nbsp;</a>
-        <!--aquí está el botón -->
-        <button class="button btn-sucess btn-lg btn-block" >Registrar Consumo</button>
-      </form>
-    </main>
-
+    <div class="jumbtrom">
+      <div class="row">
+        <div class="col-md-5">
+          <main class="form-signin">
+            <form [formGroup]="form">
+              <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+                integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+                crossorigin="anonymous">
+              <h1 class="h3 mb-3 fw-normal">Consumo Diario</h1>
+             
+          
+             
+             
+              <mat-label>Alimentos Desayuno</mat-label>
+              <mat-select class="form-control" id="desayuno" formControlName="desayuno" multiple class="multipleSelect" >
+                <mat-option  *ngFor="let eleccion of arrayProductos" [value]="eleccion">{{eleccion}}</mat-option>
+              </mat-select>
+  
+              <mat-label>Alimentos Merienda</mat-label>
+              <mat-select formControlName="merienda" id="merienda" multiple class="multipleSelect" >
+                <mat-option  *ngFor="let eleccion of arrayProductos" [value]="eleccion">{{eleccion}}</mat-option>
+              </mat-select>
+  
+               
+              <mat-label>Alimentos Almuerzo</mat-label>
+              <mat-select formControlName="almuerzo"  id="almuerzo" multiple class="multipleSelect" >
+                <mat-option  *ngFor="let eleccion of arrayProductos" [value]="eleccion">{{eleccion}}</mat-option>
+              </mat-select>
+  
+              <mat-label>Alimentos Merienda Tarde</mat-label>
+              <mat-select formControlName="meriendaTarde" id="meriendaTarde" multiple class="multipleSelect" >
+                <mat-option  *ngFor="let eleccion of arrayProductos" [value]="eleccion">{{eleccion}}</mat-option>
+              </mat-select>
+  
+              <mat-label>Alimentos Cena</mat-label>
+              <mat-select formControlName="cena"  id="cena" multiple class="multipleSelect" >
+                <mat-option  *ngFor="let eleccion of arrayProductos" [value]="eleccion">{{eleccion}}</mat-option>
+              </mat-select>
+              <h1></h1>
+             
+                
+             
+   
+              <h1></h1>
+              <!-- (click)="guardarPelicula()" -->
+              
+              <div> 
+                <button class="button btn-sucess btn-lg btn-block" (click)="agregar()" >Enviar Plan</button>
+              </div>
+  
+          </form>
+          <!-- <table id="tabla">
+  
+          </table> -->
+  
+  
+        </main>
+      </div>
+      <!-- <div class="col-md-7">
+          <h6 class="text-center">
+              Peliculas
+          </h6>
+          
+      </div> -->
+  </div>
+  </div>
   </body>
-</html>
+  
+  </html>

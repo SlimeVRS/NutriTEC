@@ -1,0 +1,108 @@
+<app-nutrinavbar></app-nutrinavbar>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="utf-8" />
+
+
+</head>
+
+<body class="text-center">
+  <div class="jumbtrom">
+    <div class="row">
+      <div class="col-md-5">
+        <main class="form-signin">
+          <form [formGroup]="form">
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+              integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+              crossorigin="anonymous">
+            <h1 class="h3 mb-3 fw-normal">Registro de Productos</h1>
+           
+        
+              <a>Descripcion</a>
+              <label for="inputDescripcion" class="visually-hidden">Descripcion</label>
+              <input id="inputDescripcion" class="form-control" formControlName="description_food" placeholder="Descripcion del producto" required
+                #DescripcionInput>
+
+            <a>Codigo de Barras</a>
+            <label for="inputBarras" class="visually-hidden">Codigo</label>
+            <input type="number" id="inputBarras" class="form-control" formControlName="id_food" placeholder="Ingrese el Codigo del Producto" required
+            #BarrasInput>
+              
+              
+            <a>Cantidad de Grasa</a>
+            <label for="inputAdult" class="visually-hidden">Cantidad de Grasa</label>
+            <input type="number" id="inputGrasa" class="form-control" formControlName="fat_food"
+              placeholder="Ingrese Cantidad de Grasa(g)" required #GrasatInput>
+
+            <a>Tamaño</a>
+            <label for="inputTamaño" class="visually-hidden">Tamaño</label>
+            <input type="number" id="inputTamaño" class="form-control" formControlName="portion_food"
+              placeholder="Ingrese Tamaño de porcion(g/ml)" required #TamañoInput>
+
+            <a>Cantidad Energia</a>
+            <label for="inputEnergia" class="visually-hidden">Energia</label>
+            <input type="number" id="inputEnergia" class="form-control" formControlName="energy_food"
+              placeholder="Ingrese Energia(Kcal)" required #EnergiaInput>
+
+              
+            <a>Cantidad Carbohidratos</a>
+            <label for="inputCarbohidratos" class="visually-hidden">Carbohidratos</label>
+            <input type="number" id="inputCarbohidratos" class="form-control" formControlName="carbs_food"
+            placeholder="Ingrese Carbohidratos(g)" required #CarbohidratosInput>
+
+            <a>Cantidad Proteina</a>
+            <label for="inputProteina" class="visually-hidden">Proteina</label>
+            <input type="number" id="inputProteina" class="form-control" formControlName="protein_food"
+            placeholder="Ingrese Proteina(g)" required #ProteinaInput>
+
+              
+
+            
+            <a>Cantidad Vitaminas</a>
+            <label for="inputVitaminas" class="visually-hidden">Vitaminas</label>
+            <input  id="inputVitaminas" class="form-control" formControlName="vitamins_food"
+            placeholder="Ingrese Vitaminas" required #VitaminasInput>
+
+            
+            <a>Cantidad Sodio</a>
+            <label for="inputSodio" class="visually-hidden">Sodio</label>
+            <input type="number" id="inputSodio" class="form-control" formControlName="sodium_food"
+            placeholder="Ingrese Sodio(mg)" required #SodioInput>
+
+            <a>Cantidad Calcio</a>
+            <label for="inputCalcio" class="visually-hidden">Calcio</label>
+            <input type="number" id="inputCalcio" class="form-control" formControlName="calcium_food"
+            placeholder="Ingrese Calcio(mg)" required #CalcioInput>
+
+            
+            <a>Cantidad Hierro</a>
+            <label for="inputiron_food" class="visually-hidden">Hierro</label>
+            <input type="number" id="inputiron_food" class="form-control" formControlName="iron_food"
+            placeholder="Ingrese Hierro(mg)" required #iron_foodInput>
+              
+            <h1></h1>
+            <!-- (click)="guardarPelicula()" -->
+            <div> 
+              <button class="button btn-sucess btn-lg btn-block"   (click)="guardarProducto()" >Enviar Producto</button>
+            </div>
+
+        </form>
+        <table id="tabla">
+
+        </table>
+
+
+      </main>
+    </div>
+    <!-- <div class="col-md-7">
+        <h6 class="text-center">
+            Peliculas
+        </h6>
+        
+    </div> -->
+</div>
+</div>
+</body>
+
+</html>

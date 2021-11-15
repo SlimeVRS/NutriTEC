@@ -12,6 +12,11 @@
       <form [formGroup]="form">
         <h1 class="h3 mb-3 fw-normal" style="color: white;">Registro de Paciente</h1>
 
+        <a style="color: white;">Cedula</a>
+        <label for="inputName" class="visually-hidden">Cedula</label>
+        <input id="inputName" class="form-control" formControlName="cedula" placeholder="ingrese cedula" required #fnameInput>
+
+
         <a style="color: white;">Primer nombre</a>
         <label for="inputName" class="visually-hidden">Primer nombre</label>
         <input id="inputName" class="form-control" formControlName="nombre" placeholder="ingrese su primer nombre" required #fnameInput>
@@ -69,6 +74,11 @@
         <label for="inputContinet" class="visually-hidden">Músculo</label>
         <input id="inputContinet" class="form-control" formControlName="Musculo" placeholder="ingrese Musculo" required #MusculoInput>
 
+        <a style="color: white;">Muslo</a>
+        <label for="inputContinet" class="visually-hidden">Muslo</label>
+        <input id="inputContinet" class="form-control" formControlName="Muslo" placeholder="ingrese Muslo" required #MusculoInput>
+
+
         <a style="color: white;">Grasa</a>
         <label for="inputContinet" class="visually-hidden">Grasa</label>
         <input id="inputContinet" class="form-control" formControlName="Grasa" placeholder="ingrese Grasa" required #GrasaInput>
@@ -77,15 +87,22 @@
         <label for="inputContinet" class="visually-hidden">CaloriasDiarias</label>
         <input id="inputContinet" class="form-control" formControlName="CaloriasDiarias" placeholder="ingrese Cosumo diario de calorias" required #CaloriasDiariasInput>
 
-        <a style="color: white;">Usuario</a>
-        <label for="inputEmail" class="visually-hidden">Usuario</label>
-        <input id="inputEmail" class="form-control" formControlName="usuario" placeholder="ingrese su nombre de usuario" required autofocus #userInput>
+        <a style="color: white;">Usuario </a>
+        <label for="inputContinet" class="visually-hidden">CaloriasDiarias</label>
+        <input id="inputContinet" class="form-control" formControlName="username" placeholder="ingrese usuario" required #CaloriasDiariasInput>
+       
+        <a style="color: white;">Email</a>
+        <label for="inputContinet" class="visually-hidden">CaloriasDiarias</label>
+        <input id="inputContinet" class="form-control" formControlName="email" placeholder="ingrese email" required #CaloriasDiariasInput>
 
-        <a style="color: white;">Contraseña</a>
-        <label for="inputPassword" class="visually-hidden">Contraseña</label>
-        <input type="password" id="inputPassword" class="form-control" formControlName="password" placeholder="ingrese su contraseña" required #passwordInput>
-        <!--aquí está el botón -->
-        <button class="button btn-sucess btn-lg btn-block" >Registrar</button>
+        <a style="color: white;">Contraseña </a>
+        <label for="inputContinet" class="visually-hidden">CaloriasDiarias</label>
+        <input id="inputContinet" class="form-control" formControlName="password" placeholder="ingrese contraseña" required #CaloriasDiariasInput>
+
+       
+        <H1></H1>
+          <!--aquí está el botón -->
+        <button class="button btn-sucess btn-lg btn-block"  (click)="agregar()" >Registrar</button>
       </form>
     </main>
 

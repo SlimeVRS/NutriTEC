@@ -1,43 +1,56 @@
 <app-navbar-client></app-navbar-client>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-  <head>
+
+<head>
     <meta charset="utf-8" />
 
 
-  </head>
-  <body class="text-center">
-<div class="jumbtrom">
-    <div class="row">
-        <div class="col-md-5">
-            <h6 class="text-center">
-                Crear receta
-            </h6>
-            <!-- (ngSubmit)="guardarEmpleado()" -->
-            <form [formGroup]="form"  >
-                <a style="color: white;">Nombre de la receta</a>
-        <label for="inputContinet" class="visually-hidden">RecetaNombre</label>
-        <input id="inputContinet" class="form-control" formControlName="RecetaNombre" placeholder="ingre el nombre de la receta" required #RecetaNombreInput>
-        <a>&nbsp;&nbsp;</a>
-<!--                <mat-label>Alimentos Desayuno</mat-label>
+</head>
+
+<body class="text-center">
+    <div class="jumbtrom">
+        <div class="row">
+            <div class="col-md-5">
+                <h6 class="text-center">
+                    Crear receta
+                </h6>
+                <!-- (ngSubmit)="guardarEmpleado()" -->
+                <form [formGroup]="form">
+                    <a style="color: white;">Nombre de la receta</a>
+                    <label for="inputContinet" class="visually-hidden">RecetaNombre</label>
+                    <input id="inputContinet" class="form-control" formControlName="RecetaNombre"
+                        placeholder="ingre el nombre de la receta" required #RecetaNombreInput>
+                    <a>&nbsp;&nbsp;</a>
+                    <!--                <mat-label>Alimentos Desayuno</mat-label>
             <mat-select class="form-control" formControlName="desayuno" multiple class="multipleSelect" >
               <mat-option  *ngFor="let eleccion of arrayProductos" [value]="eleccion">{{eleccion}}</mat-option>
             </mat-select>
 -->
-                <div class="form-group">
-                    <button class="button btn-sucess btn-lg btn-block" [disabled]="form.invalid" type="submit">Crear nueva receta</button>
-                </div>
-                
-            </form>
-        </div>
+                    <!-- <div class="form-group">
+                        <button class="button btn-sucess btn-lg btn-block" [disabled]="form.invalid" type="submit">Crear
+                            nueva receta</button>
+                    </div> -->
+                    <div class="form-group">
+                        <button class="button btn-sucess btn-lg btn-block" [disabled]="productosForm.invalid" type="submit">Aceptar</button>
+                    </div>
 
-        <div class="col-md-7">
-            <h6 class="text-center">
-                Productos existentes
-            </h6>
-            <!-- <app-normal-employees-list></app-normal-employees-list> -->
+                </form>
+            </div>
+
+            <div class="col-md-7">
+                <h6 class="text-center">
+                    Productos existentes
+                </h6>
+
+                <form [formGroup]="productosForm">
+                    <select formControlName="directoresx" id="inputDirector">
+                        <option [value]='director' *ngFor="let director of productosArray">{{director}}</option>
+                    </select>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 
 </body>
+
 </html>

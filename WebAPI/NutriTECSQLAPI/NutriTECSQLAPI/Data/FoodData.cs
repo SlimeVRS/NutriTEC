@@ -174,7 +174,7 @@ namespace NutriTECSQLAPI.Data
                                 id_food = Convert.ToInt32(dataReader["id_food"]),
                                 description_food = dataReader["description_food"].ToString(),
                                 portion_food = dataReader["portion_food"].ToString(),
-                                fat_food = Convert.ToInt32(dataReader["fat_food"]),
+                                fat_food = Convert.ToSingle(dataReader["fat_food"]),
                                 vitamins_food = dataReader["vitamins_food"].ToString(),
                                 calcium_food = Convert.ToSingle(dataReader["calcium_food"]),
                                 iron_food = Convert.ToSingle(dataReader["iron_food"]),
@@ -190,7 +190,7 @@ namespace NutriTECSQLAPI.Data
                 }
                 catch
                 {
-                    return null;
+                    return food;
                 }
             }
         }
@@ -201,7 +201,7 @@ namespace NutriTECSQLAPI.Data
             {
                 SqlCommand cmd = new SqlCommand("usp_deletefoodbyid", connection);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("id_food", food_id);
+                cmd.Parameters.AddWithValue("@id_food", food_id);
                 try
                 {
                     connection.Open();
@@ -214,8 +214,8 @@ namespace NutriTECSQLAPI.Data
                 }
             }
         }
-		
-		public static List<Food> GetFoodsByState(int food_state)
+
+        public static List<Food> GetFoodsByState(int food_state)
         {
             List<Food> foodList = new List<Food>();
             using (SqlConnection connection = new SqlConnection(Connection.connectionStringSQL))

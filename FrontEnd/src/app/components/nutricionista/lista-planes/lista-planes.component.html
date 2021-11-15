@@ -1,0 +1,6 @@
+
+<form [formGroup]="planesForm">
+              <select formControlName="planesControl" id="inputDirector">
+                <option [value]='director' *ngFor="let director of planesArray">{{director}}</option>
+              </select>
+            </form>

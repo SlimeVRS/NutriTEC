@@ -29,6 +29,12 @@ namespace NutriTECSQLAPI.Controllers
             return FoodData.GetFoodsByName(name);
         }
 
+        // GET api/unchecked/<controller>/
+        [Route("api/food/unchecked/{food_state}")]
+        public List<Food> GetFoodsByState(int food_state)
+        {
+            return FoodData.GetFoodsByState(food_state);
+        }
         // POST api/<controller>
         [HttpPost]
         public bool RegisterNewFood([FromBody] Food food)

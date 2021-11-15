@@ -25,5 +25,6 @@ namespace NutriTECSQLAPI.Models
         public float hip_patient { get; set; }
         public float thigh_patient { get; set; }
         public float fat_patient { get; set; }
+        public int id_nutritionist_patient { get; set; }
     }
 }

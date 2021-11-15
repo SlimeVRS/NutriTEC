@@ -1,4 +1,4 @@
-<app-navbar-admin></app-navbar-admin>
+<app-navbar-client></app-navbar-client>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
@@ -61,7 +61,7 @@
             
             <a>Cantidad Vitaminas</a>
             <label for="inputVitaminas" class="visually-hidden">Vitaminas</label>
-            <input type="number" id="inputVitaminas" class="form-control" formControlName="vitamins_food"
+            <input  id="inputVitaminas" class="form-control" formControlName="vitamins_food"
             placeholder="Ingrese Vitaminas" required #VitaminasInput>
 
             
@@ -84,7 +84,7 @@
             <h1></h1>
             <!-- (click)="guardarPelicula()" -->
             <div> 
-              <button class="button btn-sucess btn-lg btn-block" >Enviar Producto</button>
+              <button class="button btn-sucess btn-lg btn-block"   (click)="guardarProducto()" >Enviar Producto</button>
             </div>
 
         </form>
