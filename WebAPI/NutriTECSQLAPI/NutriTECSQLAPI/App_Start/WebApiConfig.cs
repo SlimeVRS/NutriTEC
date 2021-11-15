@@ -50,6 +50,12 @@ namespace NutriTECSQLAPI
                 routeTemplate: "api/recipe/myrecipes/{id_patient}",
                 defaults: new { id_patient = RouteParameter.Optional }
             );
+
+            config.Routes.MapHttpRoute(
+                name: "PatientMeasures",
+                routeTemplate: "api/patient/mymeasures/{id_patient}",
+                defaults: new { id_patient = RouteParameter.Optional }
+            );
         }
     }
 }
