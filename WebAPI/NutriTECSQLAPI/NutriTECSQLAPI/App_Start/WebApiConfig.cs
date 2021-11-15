@@ -55,7 +55,7 @@ namespace NutriTECSQLAPI
                 name: "PatientMeasures",
                 routeTemplate: "api/patient/mymeasures/{id_patient}",
                 defaults: new { id_patient = RouteParameter.Optional }
-            );
+            );         
         }
     }
 }

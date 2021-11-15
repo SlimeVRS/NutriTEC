@@ -135,6 +135,18 @@ DROP PROCEDURE usp_modifypatientmeasures
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'p' AND name = 'usp_getpatientmeasures')
 DROP PROCEDURE usp_getpatientmeasures
 
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'p' AND name = 'usp_getallunrelatedpatients')
+DROP PROCEDURE usp_getallunrelatedpatients
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'p' AND name = 'usp_getunrelatedrecipes')
+DROP PROCEDURE usp_getunrelatedrecipes
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'p' AND name = 'usp_modifypatientnutritionist')
+DROP PROCEDURE usp_modifypatientnutritionist
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'p' AND name = 'usp_givenewrecipe')
+DROP PROCEDURE usp_givenewrecipe
+
 GO
 
 -- PROCEDURE FOR REGISTER A NEW USER
@@ -410,43 +422,12 @@ CREATE PROCEDURE usp_registerpatientmeasures(
 GO
 
 -- PROCEDURE FOR UPDATE A PATIENT
-CREATE PROCEDURE usp_modifypatientmeasures(
+CREATE PROCEDURE usp_modifypatientnutritionist(
 	@id_patient INT,
-	@first_name_patient VARCHAR(255),
-	@second_name_patient VARCHAR(255),
-	@first_last_name_patient VARCHAR(255),
-	@second_last_name_patient VARCHAR(255),
-	@birth_date_patient DATE,
-	@initial_weight_patient FLOAT,
-	@actual_weight_patient FLOAT,
-	@imc_patient FLOAT,
-	@calories_patient FLOAT,
-	@country_patient VARCHAR(255),
-	@waist_patient FLOAT,
-	@neck_patient FLOAT,
-	@hip_patient FLOAT,
-	@thigh_patient FLOAT,
-	@fat_patient FLOAT,
 	@id_nutritionist_patient INT)
 	AS
 	BEGIN
 		UPDATE patients SET
-			id_patient = @id_patient,
-			first_name_patient = @first_name_patient,
-			second_name_patient = @second_name_patient,
-			first_last_name_patient = @first_last_name_patient,
-			second_last_name_patient = @second_last_name_patient,
-			birth_date_patient = @birth_date_patient,
-			initial_weight_patient = @initial_weight_patient,
-			actual_weight_patient = @actual_weight_patient,
-			imc_patient = @imc_patient,
-			calories_patient = @calories_patient,
-			country_patient = @country_patient,
-			waist_patient = @waist_patient,
-			neck_patient = @neck_patient,
-			hip_patient = @hip_patient,
-			thigh_patient = @thigh_patient,
-			fat_patient = @fat_patient,
 			id_nutritionist_patient = @id_nutritionist_patient
 		WHERE id_patient = @id_patient
 	END
@@ -457,6 +438,14 @@ CREATE PROCEDURE usp_getallpatients
 	AS
 	BEGIN
 		SELECT * FROM patients
+	END
+GO
+
+-- PROCEDURE TO GET ALL FREE PATIENTS
+CREATE PROCEDURE usp_getallunrelatedpatients
+	AS
+	BEGIN
+		SELECT * FROM patients WHERE id_nutritionist_patient = 0
 	END
 GO
 
@@ -770,11 +759,29 @@ CREATE PROCEDURE usp_modifyrecipe(@id_recipe INT, @name_recipe VARCHAR(255), @in
 	END
 GO
 
+CREATE PROCEDURE usp_givenewrecipe(@id_recipe INT, @id_patient_recipe INT)
+	AS
+	BEGIN
+		UPDATE recipes SET 
+			id_patient_recipe = @id_patient_recipe
+		WHERE id_recipe = @id_recipe
+	END
+GO
+
+
 -- PROCEDURE TO GET ALL RECIPES
 CREATE PROCEDURE usp_getallrecipes
 	AS
 	BEGIN
 		SELECT * FROM recipes
+	END
+GO
+
+-- PROCEDURE TO GET UNRELATED RECIPES
+CREATE PROCEDURE usp_getunrelatedrecipes
+	AS
+	BEGIN
+		SELECT * FROM recipes WHERE id_patient_recipe = 0
 	END
 GO
 

@@ -28,6 +28,19 @@ namespace NutriTECSQLAPI.Controllers
         {
             return PatientData.GetAllPatientMeasures(id_patient);
         }
+
+        [Route("api/patient/unrelated")]
+        public List<Patient> GetAllUnrelatedPatients()
+        {
+            return PatientData.GetAllUnrelatedPatients();
+        }
+
+        [Route("api/patient/addnutritionist")]
+        [HttpPost]
+        public bool GiveNewNutritionist([FromBody] PatientNutritionist patient)
+        {
+            return PatientData.GiveNewNutritionist(patient);
+        }
         // POST api/<controller>
         [HttpPost]
         public bool Post([FromBody] Patient patient)
