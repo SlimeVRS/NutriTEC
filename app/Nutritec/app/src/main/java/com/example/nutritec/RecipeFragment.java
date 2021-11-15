@@ -13,13 +13,24 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.nutritec.databinding.ActivityFragmentRecipeBinding;
 import com.google.android.material.snackbar.Snackbar;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -31,7 +42,10 @@ public class RecipeFragment extends Fragment {
     private ArrayAdapter<String> adapterComidas;
     private ArrayList<String> arr_comidas;
     private Spinner spinComida;
-    private boolean F=false,bool_food=F,bool_add=F;
+    private boolean F=false,bool_food=F,add_food=F;
+    private RequestQueue queue;
+    private JSONArray comidas_arr,recetas_arr;
+    private JSONObject comida,receta;
 
     @Override
     public View onCreateView(
@@ -55,7 +69,11 @@ public class RecipeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 bool_food=true;
-                add_producto();
+                try {
+                    add_producto();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
         binding.confirm.setOnClickListener(new View.OnClickListener() {
@@ -63,7 +81,7 @@ public class RecipeFragment extends Fragment {
             public void onClick(View view) {
                 EditText nombre =(EditText) getActivity().findViewById(R.id.nombre_receta_text);
                 boolean nomb = nombre.getText().toString().isEmpty();
-                if (bool_food && nomb){
+                if (bool_food && !nomb){
                     Snackbar.make(view, "Se guardó la receta", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                     return;
@@ -76,7 +94,7 @@ public class RecipeFragment extends Fragment {
         binding.start2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                spinFood();
+                pedir_comidas();
             }
         });
         EditText editTextBusqueda = getActivity().findViewById(R.id.id_product_2);
@@ -105,7 +123,11 @@ public class RecipeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if(bool_food){
-                    add_producto();
+                    try {
+                        add_producto();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                     return;
                 }else{
                     EditText codigo_text=getActivity().findViewById(R.id.id_product_2);
@@ -113,10 +135,22 @@ public class RecipeFragment extends Fragment {
                     if (!codigo_str.isEmpty()){
                         codigo = Integer.parseInt(codigo_str);
                         //buscar con esto el dato de la comida
-                        if(codigo==1){
-                            food="papas";
-                            add_producto();
+                        for(int i=0;i<comidas_arr.length();i++){
+                            try {
+                                comida= (JSONObject) comidas_arr.get(i);
+                                if(codigo==comida.getInt("id_food")){
+                                    food=comida.getString("description_food");
+                                    add_producto();
+                                    return;
+                                }else{
+                                    Toast.makeText(getActivity(),"No se encontró una comida con ese codigo",Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
                         }
+
                         return;
                     }else{
                         Snackbar.make(view, "Debe Ingresar el codigo de la comida o seleccionar una", Snackbar.LENGTH_LONG)
@@ -124,38 +158,85 @@ public class RecipeFragment extends Fragment {
                     }
                 }
             }
+
+        });
+    }
+    private void pedir_comidas(){
+        String url ="http://192.168.0.2:45456/api/food";
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+        // Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            comidas_arr=new JSONArray(response);
+                            iniciar2();
+                            return;
+
+                        } catch (JSONException  e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(),"no funcó",Toast.LENGTH_SHORT).show();
+            }
         });
 
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
     }
 
-    private void add_producto(){
+
+    private void add_producto() throws JSONException {
         //se llama al api
         //usar food para buscar en el api los datos
+        add_food=true;
         productos+=food+"\n";
-        porcion+=1;
-        energia+=300;
-        grasa+=100;
-        sodio+=20;
-        carbohidratos+=30;
-        proteína+=100;
-        vitaminas+=80;
-        calcio+=50;
-        hierro+=90;
-        mostrar_productos();
-        mostrar_valores_nut();
+        for(int i=0;i<comidas_arr.length();i++){
+            comida= (JSONObject) comidas_arr.get(i);
+            if(comida.getString("description_food")==food){
+                String portion=comida.getString("portion_food");
+                portion=portion.replace(" g","");
+                porcion+=(int) Double.parseDouble(portion);
+                energia+=comida.getInt("energy_food");
+                grasa+=comida.getInt("fat_food");
+                sodio+=comida.getInt("sodium_food");
+                carbohidratos+=comida.getInt("carbs_food");
+                proteína+=comida.getInt("protein_food");
+                vitaminas+=2;
+                calcio+=comida.getInt("calcium_food");
+                hierro+=comida.getInt("iron_food");
+                add_food=true;
+                mostrar_productos();
+                mostrar_valores_nut();
+            }
+        }
+    }
+    private void iniciar2() throws JSONException {
+        spinFood();
     }
     private void mostrar_productos(){
         TextView productos_text=(TextView) getActivity().findViewById(R.id.productos_text_2);
         productos_text.setText( productos);
     }
-    private void spinFood(){
+    private void spinFood() throws JSONException {
         spinComida=getActivity().findViewById(R.id.comidas2);
         arr_comidas=new ArrayList();
         arr_comidas.add("Seleccione una comida");
-        //cambiar por la coneccion al api
-        arr_comidas.add("papa");
-        arr_comidas.add("chicles");
-        arr_comidas.add("coca");
+
+        for(int i=0;i<comidas_arr.length();i++){
+            comida= (JSONObject) comidas_arr.get(i);
+            arr_comidas.add(comida.getString("description_food"));
+            //valores_text.setText(comida.getString("id_food"));
+        }
+
+
+
         adapterComidas = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item,arr_comidas);
         adapterComidas.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinComida.setAdapter(adapterComidas);

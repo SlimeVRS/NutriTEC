@@ -125,10 +125,22 @@ public class SecondFragment extends Fragment {
                         if (!codigo_str.isEmpty()){
                             codigo = Integer.parseInt(codigo_str);
                             //buscar con esto el dato de la comida
-                            if(codigo==1){
-                                food="papas";
-                                //add_producto();
+                            for(int i=0;i<comidas_arr.length();i++){
+                                try {
+                                    comida= (JSONObject) comidas_arr.get(i);
+                                    if(codigo==comida.getInt("id_food")){
+                                        food=comida.getString("description_food");
+                                        add_producto();
+                                        return;
+                                    }else{
+                                        Toast.makeText(getActivity(),"No se encontró una comida con ese codigo",Toast.LENGTH_SHORT).show();
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
                             }
+
                             return;
                         }else{
                             Snackbar.make(view, "Debe Ingresar el codigo de la comida o seleccionar una", Snackbar.LENGTH_LONG)
@@ -142,9 +154,6 @@ public class SecondFragment extends Fragment {
     private void pedir_comidas(){
         String url ="http://192.168.0.2:45456/api/food";
         RequestQueue queue = Volley.newRequestQueue(getActivity());
-
-        TextView valores_text=(TextView) getActivity().findViewById(R.id.datos_comida_1);
-
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -164,8 +173,6 @@ public class SecondFragment extends Fragment {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                valores_text.setText(error.toString());
-                System.out.println(error);
                 Toast.makeText(getActivity(),"no funcó",Toast.LENGTH_SHORT).show();
             }
         });
@@ -184,7 +191,7 @@ public class SecondFragment extends Fragment {
             if(comida.getString("description_food")==food){
                 String portion=comida.getString("portion_food");
                 portion=portion.replace(" g","");
-                porcion+=Integer.parseInt(portion);
+                porcion+=(int) Double.parseDouble(portion);
                 energia+=comida.getInt("energy_food");
                 grasa+=comida.getInt("fat_food");
                 sodio+=comida.getInt("sodium_food");
