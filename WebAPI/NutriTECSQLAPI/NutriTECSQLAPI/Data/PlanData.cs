@@ -17,14 +17,13 @@ namespace NutriTECSQLAPI.Data
             {
                 SqlCommand cmd = new SqlCommand("usp_registernewplan", connection);
                 cmd.CommandType = CommandType.StoredProcedure;
-              
-
                 cmd.Parameters.AddWithValue("@name_plan", plan.name_plan);
                 cmd.Parameters.AddWithValue("@breakfast", plan.breakfast);
                 cmd.Parameters.AddWithValue("@morning_snack", plan.morning_snack);
                 cmd.Parameters.AddWithValue("@lunch", plan.lunch);
                 cmd.Parameters.AddWithValue("@afternoon_snack", plan.afternoon_snack);
                 cmd.Parameters.AddWithValue("@dinner", plan.dinner);
+                cmd.Parameters.AddWithValue("@id_patient_nutritionist", plan.id_patient_nutritionist);
                 try
                 {
                     connection.Open();
@@ -51,6 +50,7 @@ namespace NutriTECSQLAPI.Data
                 cmd.Parameters.AddWithValue("@lunch", plan.lunch);
                 cmd.Parameters.AddWithValue("@afternoon_snack", plan.afternoon_snack);
                 cmd.Parameters.AddWithValue("@dinner", plan.dinner);
+                cmd.Parameters.AddWithValue("@id_patient_nutritionist", plan.id_patient_nutritionist);
                 try
                 {
                     connection.Open();
@@ -87,7 +87,8 @@ namespace NutriTECSQLAPI.Data
                                 morning_snack = dataReader["morning_snack"].ToString(),
                                 lunch = dataReader["lunch"].ToString(),
                                 afternoon_snack = dataReader["afternoon_snack"].ToString(),
-                                dinner = dataReader["dinner"].ToString()
+                                dinner = dataReader["dinner"].ToString(),
+                                id_patient_nutritionist = Convert.ToInt32(dataReader["id_patient_nutritionist"])
                             });
                         }
                     }
@@ -123,7 +124,8 @@ namespace NutriTECSQLAPI.Data
                                 morning_snack = dataReader["morning_snack"].ToString(),
                                 lunch = dataReader["lunch"].ToString(),
                                 afternoon_snack = dataReader["afternoon_snack"].ToString(),
-                                dinner = dataReader["dinner"].ToString()
+                                dinner = dataReader["dinner"].ToString(),
+                                id_patient_nutritionist = Convert.ToInt32(dataReader["id_patient_nutritionist"])
                             };
                         }
                     }

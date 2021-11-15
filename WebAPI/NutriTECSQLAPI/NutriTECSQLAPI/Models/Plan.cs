@@ -14,5 +14,6 @@ namespace NutriTECSQLAPI.Models
         public string lunch { get; set; }
         public string afternoon_snack { get; set; }
         public string dinner { get; set; }
+        public int id_patient_nutritionist { get; set; }
     }
 }

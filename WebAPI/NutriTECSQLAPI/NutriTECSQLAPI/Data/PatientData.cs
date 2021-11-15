@@ -32,6 +32,7 @@ namespace NutriTECSQLAPI.Data
                 cmd.Parameters.AddWithValue("@hip_patient", patient.hip_patient);
                 cmd.Parameters.AddWithValue("@thigh_patient", patient.thigh_patient);
                 cmd.Parameters.AddWithValue("@fat_patient", patient.fat_patient);
+                cmd.Parameters.AddWithValue("@id_nutritionist_patient", patient.id_nutritionist_patient);
                 try
                 {
                     connection.Open();
@@ -67,6 +68,7 @@ namespace NutriTECSQLAPI.Data
                 cmd.Parameters.AddWithValue("@hip_patient", patient.hip_patient);
                 cmd.Parameters.AddWithValue("@thigh_patient", patient.thigh_patient);
                 cmd.Parameters.AddWithValue("@fat_patient", patient.fat_patient);
+                cmd.Parameters.AddWithValue("@id_nutritionist_patient", patient.id_nutritionist_patient);
                 try
                 {
                     connection.Open();
@@ -111,7 +113,8 @@ namespace NutriTECSQLAPI.Data
                                 neck_patient = Convert.ToSingle(dataReader["neck_patient"].ToString()),
                                 hip_patient = Convert.ToSingle(dataReader["hip_patient"].ToString()),
                                 thigh_patient = Convert.ToSingle(dataReader["thigh_patient"].ToString()),
-                                fat_patient = Convert.ToSingle(dataReader["fat_patient"].ToString())
+                                fat_patient = Convert.ToSingle(dataReader["fat_patient"].ToString()),
+                                id_nutritionist_patient = Convert.ToInt32(dataReader["id_nutritionist_patient"])
                             });
                         }
                     }
@@ -156,7 +159,8 @@ namespace NutriTECSQLAPI.Data
                                 neck_patient = Convert.ToSingle(dataReader["neck_patient"].ToString()),
                                 hip_patient = Convert.ToSingle(dataReader["hip_patient"].ToString()),
                                 thigh_patient = Convert.ToSingle(dataReader["thigh_patient"].ToString()),
-                                fat_patient = Convert.ToSingle(dataReader["fat_patient"].ToString())
+                                fat_patient = Convert.ToSingle(dataReader["fat_patient"].ToString()),
+                                id_nutritionist_patient = Convert.ToInt32(dataReader["id_nutritionist_patient"])
                             };
                         }
                     }
