@@ -1,3 +1,9 @@
+INSERT INTO admins
+VALUES(1548135, 'Marco', '', 'Rivera', 'Serrano', '11111111')
+
+INSERT INTO nutritionists
+VALUES(0, 'Nutricionista', 'Base', 'Para', 'FrontEND', '1999-10-12', 0, 0, 0, 'pfp',123,1,'direction')
+
 INSERT INTO foods
 VALUES(123456789, 'frijoles', '100 g', 1, 'A: 0%, C:2%', 2, 11, 241, 18, 101, 5, 0)
 
