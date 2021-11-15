@@ -43,6 +43,8 @@ public class SecondFragment extends Fragment {
     private Spinner spinTiempo,spinComida;
     private boolean F=false,bool_food=F,bool_time=F,add_food=F;
     private RequestQueue queue;
+    private JSONArray comidas_arr,recetas_arr;
+    private JSONObject comida,receta;
 
     @Override
     public View onCreateView(
@@ -70,8 +72,6 @@ public class SecondFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 pedir_comidas();
-
-                //iniciar();
             }
         });
         EditText editTextBusqueda = getActivity().findViewById(R.id.id_produc_1);
@@ -113,7 +113,11 @@ public class SecondFragment extends Fragment {
             public void onClick(View view) {
 
                     if(bool_food){
-                        add_producto();
+                        try {
+                            add_producto();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                         return;
                     }else{
                         EditText codigo_text=getActivity().findViewById(R.id.id_produc_1);
@@ -123,7 +127,7 @@ public class SecondFragment extends Fragment {
                             //buscar con esto el dato de la comida
                             if(codigo==1){
                                 food="papas";
-                                add_producto();
+                                //add_producto();
                             }
                             return;
                         }else{
@@ -136,59 +140,71 @@ public class SecondFragment extends Fragment {
         });
     }
     private void pedir_comidas(){
-        String url ="http://localhost:55974/api/food";
-        String url2 ="http://www.google.com";
-        JsonObjectRequest request =new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    JSONArray comidas_arr=response.getJSONArray("ArrayOfFood ");
-                    for(int i=0; i<comidas_arr.length();i++){
-                        JSONObject objetojson= comidas_arr.getJSONObject(i);
-                        String name= objetojson.getString("description_food");
-                        Toast.makeText(getActivity(),name,Toast.LENGTH_SHORT).show();
+        String url ="http://192.168.0.2:45456/api/food";
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+
+        TextView valores_text=(TextView) getActivity().findViewById(R.id.datos_comida_1);
+
+        // Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            comidas_arr=new JSONArray(response);
+                            iniciar();
+                            return;
+
+                        } catch (JSONException  e) {
+                            e.printStackTrace();
+                        }
+
+
                     }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(getActivity(),"no funcó",Toast.LENGTH_SHORT).show();
-                }
-
-
-            }
-        }, new Response.ErrorListener() {
+                }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                valores_text.setText(error.toString());
+                System.out.println(error);
                 Toast.makeText(getActivity(),"no funcó",Toast.LENGTH_SHORT).show();
             }
         });
-        queue.add(request);
+
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
     }
 
 
-    private void add_producto(){
+    private void add_producto() throws JSONException {
         //se llama al api
         //usar food para buscar en el api los datos
         productos+=food+"\n";
-        porcion+=1;
-        energia+=300;
-        grasa+=100;
-        sodio+=20;
-        carbohidratos+=30;
-        proteína+=100;
-        vitaminas+=80;
-        calcio+=50;
-        hierro+=90;
-        add_food=true;
-        mostrar_productos();
-        mostrar_valores_nut();
+        for(int i=0;i<comidas_arr.length();i++){
+            comida= (JSONObject) comidas_arr.get(i);
+            if(comida.getString("description_food")==food){
+                String portion=comida.getString("portion_food");
+                portion=portion.replace(" g","");
+                porcion+=Integer.parseInt(portion);
+                energia+=comida.getInt("energy_food");
+                grasa+=comida.getInt("fat_food");
+                sodio+=comida.getInt("sodium_food");
+                carbohidratos+=comida.getInt("carbs_food");
+                proteína+=comida.getInt("protein_food");
+                vitaminas+=2;
+                calcio+=comida.getInt("calcium_food");
+                hierro+=comida.getInt("iron_food");
+                add_food=true;
+                mostrar_productos();
+                mostrar_valores_nut();
+            }
+        }
     }
     private void mostrar_productos(){
         TextView productos_text=(TextView) getActivity().findViewById(R.id.productos_text_1);
         productos_text.setText( productos);
     }
 
-    private void iniciar(){
+    private void iniciar() throws JSONException {
         spinTiempo();
         spinFood();
     }
@@ -222,14 +238,16 @@ public class SecondFragment extends Fragment {
         });
     }
 
-    private void spinFood(){
+    private void spinFood() throws JSONException {
         spinComida=getActivity().findViewById(R.id.comidas_1);
         arr_comidas=new ArrayList();
         arr_comidas.add("Seleccione una comida");
-        //cambiar por la coneccion al api
-        arr_comidas.add("papa");
-        arr_comidas.add("chicles");
-        arr_comidas.add("coca");
+
+        for(int i=0;i<comidas_arr.length();i++){
+            comida= (JSONObject) comidas_arr.get(i);
+            arr_comidas.add(comida.getString("description_food"));
+            //valores_text.setText(comida.getString("id_food"));
+        }
         adapterComidas = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item,arr_comidas);
         adapterComidas.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinComida.setAdapter(adapterComidas);
