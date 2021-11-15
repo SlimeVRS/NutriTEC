@@ -82,6 +82,71 @@ namespace NutriTECSQLAPI.Data
             }
         }
 
+        public static bool ModifyPatientMeasures(PatientMeasures patient)
+        {
+            using (SqlConnection connection = new SqlConnection(Connection.connectionStringSQL))
+            {
+                SqlCommand cmd = new SqlCommand("usp_registerpatientmeasures", connection);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@date_patient", patient.date_patient);
+                cmd.Parameters.AddWithValue("@waist_patient", patient.waist_patient);
+                cmd.Parameters.AddWithValue("@neck_patient", patient.neck_patient);
+                cmd.Parameters.AddWithValue("@hip_patient", patient.hip_patient);
+                cmd.Parameters.AddWithValue("@fat_patient", patient.fat_patient);
+                cmd.Parameters.AddWithValue("@muscle_patient", patient.muscle_patient);
+                cmd.Parameters.AddWithValue("@weight_patient", patient.weight_patient);
+                cmd.Parameters.AddWithValue("@id_patient_owner", patient.id_patient_owner);
+                try
+                {
+                    connection.Open();
+                    cmd.ExecuteNonQuery();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
+
+        public static List<PatientMeasures> GetAllPatientMeasures(int id_patient)
+        {
+            List<PatientMeasures> patientMeasures = new List<PatientMeasures>();
+            using (SqlConnection connection = new SqlConnection(Connection.connectionStringSQL))
+            {
+                SqlCommand cmd = new SqlCommand("usp_getpatientmeasures", connection);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id_patient_owner", id_patient);
+                try
+                {
+                    connection.Open();
+                    using (SqlDataReader dataReader = cmd.ExecuteReader())
+                    {
+                        while(dataReader.Read())
+                        {
+                            patientMeasures.Add(new PatientMeasures()
+                            { 
+                                id_patientM = Convert.ToInt32(dataReader["id_patientM"]),
+                                date_patient = Convert.ToDateTime(dataReader["date_patient"]),
+                                waist_patient = Convert.ToSingle(dataReader["waist_patient"]),
+                                neck_patient = Convert.ToSingle(dataReader["neck_patient"]),
+                                hip_patient = Convert.ToSingle(dataReader["hip_patient"]),
+                                fat_patient = Convert.ToSingle(dataReader["fat_patient"]),
+                                muscle_patient = Convert.ToSingle(dataReader["muscle_patient"]),
+                                weight_patient = Convert.ToSingle(dataReader["weight_patient"]),
+                                id_patient_owner = Convert.ToInt32(dataReader["id_patient_owner"])
+                            });
+                        }
+                    }
+                    return patientMeasures;
+                }
+                catch
+                {
+                    return patientMeasures;
+                }
+            }
+        }
+
         public static List<Patient> GetAllPatients()
         {
             List<Patient> patientList = new List<Patient>();
