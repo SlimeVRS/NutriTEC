@@ -181,7 +181,7 @@ GO
 CREATE PROCEDURE usp_getuserbynamepasswordemail(@username VARCHAR(100),@password VARCHAR(100))
 	AS
 	BEGIN
-		SELECT id_user, username, email, usertype FROM users
+		SELECT id_user, username, email, usertype, user_owner FROM users
 		WHERE username = @username AND password = @password
 	END
 
