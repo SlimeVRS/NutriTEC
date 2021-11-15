@@ -87,6 +87,24 @@ DROP PROCEDURE usp_getnutritionistbyid
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'p' AND name = 'usp_deletenutritionistbyid')
 DROP PROCEDURE usp_deletenutritionistbyid
 
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'p' AND name = 'usp_registernewplan')
+DROP PROCEDURE usp_registernewplan
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'p' AND name = 'usp_modifyfoodplan')
+DROP PROCEDURE usp_modifyfoodplan
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'p' AND name = 'usp_getallfoodplans')
+DROP PROCEDURE usp_getallfoodplans
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'p' AND name = 'usp_getplanbyid')
+DROP PROCEDURE usp_getplanbyid
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'p' AND name = 'usp_deleteplanbyid')
+DROP PROCEDURE usp_deleteplanbyid
+
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'p' AND name = 'usp_getfoodsbystate')
+DROP PROCEDURE usp_getfoodsbystate
+
 GO
 
 -- PROCEDURE FOR REGISTER A NEW USER
@@ -238,10 +256,17 @@ CREATE PROCEDURE usp_getfoodsbyname(@description_food VARCHAR(100))
 	BEGIN
 		SELECT * FROM foods WHERE description_food = @description_food
 	END
-
 GO
 
--- PROCEDURE TO DELETE AN ESPECIFIC USER
+-- PROCEDURE TO GET AN ESPECIFIC FOOD BY ITS STATE
+CREATE PROCEDURE usp_getfoodsbystate(@food_state INT)
+	AS
+	BEGIN
+		SELECT * FROM foods WHERE food_state = @food_state
+	END
+GO
+
+-- PROCEDURE TO DELETE AN ESPECIFIC FOOD
 CREATE PROCEDURE usp_deletefoodbyid(@id_food int)
 	AS
 	BEGIN
@@ -555,5 +580,67 @@ CREATE PROCEDURE usp_deletenutritionistbyid(@id_nutritionist int)
 	AS
 	BEGIN
 		DELETE FROM nutritionists WHERE id_nutritionist = @id_nutritionist
+	END
+GO
+
+-- PROCEDURE FOR REGISTER A NEW PLAN
+CREATE PROCEDURE usp_registernewplan(
+	@name_plan VARCHAR(255),
+	@breakfast VARCHAR(255),
+	@morning_snack VARCHAR(255),
+	@lunch VARCHAR(255),
+	@afternoon_snack VARCHAR(255),
+	@dinner VARCHAR(255))
+	AS
+	BEGIN
+		INSERT INTO food_plan(name_plan, breakfast, morning_snack, lunch, afternoon_snack, dinner)
+		VALUES(@name_plan, @breakfast, @morning_snack,@lunch, @afternoon_snack, @dinner)
+	END
+GO
+
+-- PROCEDURE FOR UPDATE A NUTRITIONIST
+CREATE PROCEDURE usp_modifyfoodplan(
+	@id_plan INT,
+	@name_plan VARCHAR(255),
+	@breakfast VARCHAR(255),
+	@morning_snack VARCHAR(255),
+	@lunch VARCHAR(255),
+	@afternoon_snack VARCHAR(255),
+	@dinner VARCHAR(255)
+	)
+	AS
+	BEGIN
+		UPDATE food_plan SET 
+			name_plan = @name_plan,
+			breakfast = @breakfast,
+			morning_snack = @morning_snack,
+			lunch = @lunch,
+			afternoon_snack = @afternoon_snack,
+			dinner = @dinner
+		WHERE id_plan = @id_plan
+	END
+GO
+-- PROCEDURE TO GET ALL NUTRITIONISTS
+CREATE PROCEDURE usp_getallfoodplans
+	AS
+	BEGIN
+		SELECT * FROM food_plan
+	END
+GO
+
+-- PROCEDURE TO GET AN ESPECIFIC USER
+CREATE PROCEDURE usp_getplanbyid(@id_plan int)
+	AS
+	BEGIN
+		SELECT * FROM food_plan
+		WHERE id_plan = @id_plan
+	END
+GO
+
+-- PROCEDURE TO DELETE AN ESPECIFIC USER
+CREATE PROCEDURE usp_deleteplanbyid(@id_plan int)
+	AS
+	BEGIN
+		DELETE FROM food_plan WHERE id_plan = @id_plan
 	END
 GO
