@@ -17,6 +17,8 @@ namespace NutriTECSQLAPI.Data
             {
                 SqlCommand cmd = new SqlCommand("usp_registernewplan", connection);
                 cmd.CommandType = CommandType.StoredProcedure;
+              
+
                 cmd.Parameters.AddWithValue("@name_plan", plan.name_plan);
                 cmd.Parameters.AddWithValue("@breakfast", plan.breakfast);
                 cmd.Parameters.AddWithValue("@morning_snack", plan.morning_snack);

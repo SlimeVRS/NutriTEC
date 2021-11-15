@@ -1,5 +1,5 @@
-export class planesModel {
-id_patient:number;
+export class clientModel {
+	id_patient:number;
 	first_name_patient:string;
 	second_name_patient :string;
 	first_last_name_patient :string;
@@ -15,5 +15,7 @@ id_patient:number;
 	hip_patient:number;
 	thigh_patient:number;
 	fat_patient:number;
-	id_nutritionist_patient:number;
+	muscle_patient:number;
+
+	id_nutritionist_patient?:number;
 }

@@ -5,11 +5,12 @@ import { ProductoService } from 'app/services/productos/producto.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-productos',
-  templateUrl: './productos.component.html',
-  styleUrls: ['./productos.component.css']
+  selector: 'app-producregist',
+  templateUrl: './producregist.component.html',
+  styleUrls: ['./producregist.component.css']
 })
-export class ProductosComponent implements OnInit {
+export class ProducregistComponent implements OnInit {
+
   form:FormGroup;
  
   list: productoModel[];
@@ -77,9 +78,9 @@ export class ProductosComponent implements OnInit {
       protein_food: this.form.get('protein_food').value,
       food_state: 1,
       iron_food: this.form.get('iron_food').value,
+
     }
     this.clientService.guardarProducto(cliente).subscribe(data => {
-      console.log(data);
       this.toastr.success('Producto Guardado', 'Enviado Exitosamente');
       this.form.reset();
     });
@@ -110,6 +111,5 @@ export class ProductosComponent implements OnInit {
     console.log(this.form);
     console.log(cliente);
   }
-
 
 }

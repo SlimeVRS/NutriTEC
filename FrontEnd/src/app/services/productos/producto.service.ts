@@ -25,6 +25,13 @@ export class ProductoService {
     }
     );
   }
+  obtenerProductosbyID() {
+    this.http.get('http://localhost:55974/api/food/unchecked/1').toPromise().then(data => {
+      this.list = data as productoModel[];
+      console.log(data);
+    }
+    );
+  }
   actualizar(producto){
     this.actualizarForm.next(producto);
   }

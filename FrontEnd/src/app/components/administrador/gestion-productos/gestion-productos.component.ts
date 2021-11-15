@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { productoModel } from 'app/models/productoModel';
 import { ProductoService } from 'app/services/productos/producto.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -14,20 +15,54 @@ export class GestionProductosComponent implements OnInit {
   enableEditIndex = null;
   constructor(public productoService: ProductoService, public toastr: ToastrService) { }
   ngOnInit(): void {
-    this.productoService.obtenerProductos();
+    this.productoService.obtenerProductosbyID();
   }
-  eliminarProducto(id) {
+  eliminarProducto(producto) {
     if (confirm('Desea eliminar el producto?')) {
-      const index = this.productoService.list.indexOf(id);
-      this.productoService.list.splice(index, 1);
-      this.productoService.eliminarProducto(id).subscribe(data => {
-        this.toastr.warning('Eliminar Exitoso', 'Producto Eliminada');
-        this.productoService.obtenerProductos();
-      })
+      // this.productoService.actualizar(producto);
+      const cliente: productoModel = {
+        id_food:  producto.id_food,
+        description_food: producto.description_food,
+        portion_food: producto.portion_food,
+        fat_food: producto.fat_food,
+        vitamins_food: producto.vitamins_food,
+        calcium_food: producto.calcium_food,
+        sodium_food: producto.sodium_food,
+        carbs_food: producto.carbs_food,
+        energy_food: producto.energy_food,
+        protein_food: producto.protein_food,
+        food_state: 2,
+        iron_food: producto.iron_food,
+      }
+      this.productoService.actualizarProducto(cliente).subscribe(data => {
+        this.toastr.success('Cliente Actualizado', 'Agregada Exitosamente');
+        window.location.reload();
+      });
     }
   }
   editar(producto) {
-    this.productoService.actualizar(producto);
+  
+    if (confirm('Desea aprobar el producto?')) {
+      // this.productoService.actualizar(producto);
+      const cliente: productoModel = {
+        id_food:  producto.id_food,
+        description_food: producto.description_food,
+        portion_food: producto.portion_food,
+        fat_food: producto.fat_food,
+        vitamins_food: producto.vitamins_food,
+        calcium_food: producto.calcium_food,
+        sodium_food: producto.sodium_food,
+        carbs_food: producto.carbs_food,
+        energy_food: producto.energy_food,
+        protein_food: producto.protein_food,
+        food_state: 0,
+        iron_food: producto.iron_food,
+      }
+      this.productoService.actualizarProducto(cliente).subscribe(data => {
+        this.toastr.success('Cliente Actualizado', 'Agregada Exitosamente');
+        window.location.reload();
+      });
+    }
     // this.employee.put=true;
     // console.log(this.employee.put);
   }

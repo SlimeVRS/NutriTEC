@@ -34,6 +34,8 @@ import { GestionRecetasComponent } from './components/client/gestion-recetas/ges
 import { RegAdminComponent } from './components/home/register/registro-admin/reg-admin/reg-admin.component';
 import { RegNutriComponent } from './components/home/register/registro-nutri/reg-nutri/reg-nutri.component';
 import { NavRegComponent } from './components/home/register/navbar-reg/nav-reg/nav-reg.component';
+import { ListaPlanesComponent } from './components/nutricionista/lista-planes/lista-planes.component';
+import { ProducregistComponent } from './components/nutricionista/producregist/producregist.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,6 +62,8 @@ import { NavRegComponent } from './components/home/register/navbar-reg/nav-reg/n
     RegAdminComponent,
     RegNutriComponent,
     NavRegComponent,
+    ListaPlanesComponent,
+    ProducregistComponent,
   ],
   imports: [
     BrowserModule,
@@ -82,8 +86,11 @@ import { NavRegComponent } from './components/home/register/navbar-reg/nav-reg/n
       {path: 'client', component:ClientComponent }, 
       {path: 'planPaciente', component:PlanPacienteComponent }, 
       {path: 'medidas', component:MedidasComponent }, 
+      {path: 'nutriproductos', component:ProducregistComponent }, 
       {path: 'gestion_recetas', component:GestionRecetasComponent }, 
       {path: 'avance', component:ReporteAvanceComponent },
+      {path: 'gestionProductos', component:GestionProductosComponent },
+      
       {path: 'consumo', component:RegistroConsumoComponent },
       {path: 'radmin', component:RegAdminComponent }, 
       {path: 'rclient', component:RegisterComponent },

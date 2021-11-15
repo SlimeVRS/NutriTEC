@@ -1,1 +1,92 @@
-<p>gestion-productos works!</p>
+<app-navbar-admin></app-navbar-admin>
+
+<body>
+    <div>
+        <table class="table table-sm">
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+                integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+                crossorigin="anonymous">
+            <tr>
+                <td style="color: rgb(13, 255, 94);">
+                    Codigo
+                </td>
+                <td style="color: rgb(13, 255, 94);">
+                    Nombre
+                </td>
+                <td style="color: rgb(13, 255, 94);">
+                    Porcion(g)
+                </td>
+                <td style="color: rgb(13, 255, 94);">
+                    Grasa(g)
+                </td>
+                <td style="color: rgb(13, 255, 94);">
+                    Vitaminas
+                </td>
+                <td style="color: rgb(13, 255, 94);">
+                    Calcio(mg)
+                </td>
+                <td style="color: rgb(13, 255, 94);">
+                    Hierro(mg)
+                </td>
+                <td style="color: rgb(13, 255, 94);">
+                    Carbohidratos(g)
+                </td>
+                <td style="color: rgb(13, 255, 94);">
+                    Calorias(Kcal)
+                </td>
+                <td style="color: rgb(13, 255, 94);">
+                    Proteinas(g)
+                </td>
+                <td style="color: rgb(13, 255, 94);">
+                    Sodio(mg)
+                </td>
+            </tr>
+            <tr *ngFor="let employee of productoService.list">
+                <td style="color: white;">
+                    {{employee.id_food}}
+                </td>
+                <td style="color: white;">
+                    {{employee.description_food}}
+                </td>
+                <td style="color: white;">
+                    {{employee.portion_food}}
+                </td>
+                <td style="color: white;">
+                    {{employee.fat_food}}
+                </td>
+                <td style="color: white;">
+                    {{employee.vitamins_food}}
+                </td>
+                <td style="color: white;">
+                    {{employee.calcium_food}}
+                </td>
+                <td style="color: white;">
+                    {{employee.iron_food}}
+                </td>
+                <td style="color: white;">
+                    {{employee.carbs_food}}
+                </td>
+                <td style="color: white;">
+                    {{employee.energy_food}}
+                </td>
+                <td style="color: white;">
+                    {{employee.protein_food}}
+                </td>
+                <td style="color: white;">
+                    {{employee.sodium_food}}
+                </td>
+
+                <td>
+                    <i class="far fa-check-square text-info" (click)="editar(employee)" style="cursor: pointer;"></i>
+                </td>
+
+                <td>
+                    <i class="far fa-trash-alt fa-lg text-danger" (click)="eliminarProducto(employee)"
+                        style="cursor: pointer;"></i>
+                </td>
+
+            </tr>
+
+        </table>
+    </div>
+</body>
