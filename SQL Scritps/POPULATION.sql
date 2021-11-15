@@ -1,3 +1,6 @@
+INSERT INTO patients
+VALUES(0, 'Paciente', 'Base', 'Para', 'FrontEND','1999-10-12', 0, 0, 0, 0, 'NC', 0,0,0,0,0,0)
+
 INSERT INTO admins
 VALUES(1548135, 'Marco', '', 'Rivera', 'Serrano', '11111111')
 
