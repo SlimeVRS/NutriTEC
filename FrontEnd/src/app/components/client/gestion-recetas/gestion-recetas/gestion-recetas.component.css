@@ -22,3 +22,7 @@ div{
     overflow-x: hidden;
     background-color:#353536 ;
   }
+  .multipleSelect{
+    background-color: #ffffff;
+    /* position: absolute; */
+  }

@@ -20,6 +20,7 @@
                     <label for="inputContinet" class="visually-hidden">RecetaNombre</label>
                     <input id="inputContinet" class="form-control" formControlName="RecetaNombre"
                         placeholder="ingre el nombre de la receta" required #RecetaNombreInput>
+
                     <a>&nbsp;&nbsp;</a>
                     <!--                <mat-label>Alimentos Desayuno</mat-label>
             <mat-select class="form-control" formControlName="desayuno" multiple class="multipleSelect" >
@@ -31,7 +32,8 @@
                             nueva receta</button>
                     </div> -->
                     <div class="form-group">
-                        <button class="button btn-sucess btn-lg btn-block" [disabled]="productosForm.invalid" type="submit">Aceptar</button>
+                        <button class="button btn-sucess btn-lg btn-block" [disabled]="productosForm.invalid"
+                            type="submit">Aceptar</button>
                     </div>
 
                 </form>
@@ -43,9 +45,12 @@
                 </h6>
 
                 <form [formGroup]="productosForm">
-                    <select formControlName="directoresx" id="inputDirector">
-                        <option [value]='director' *ngFor="let director of productosArray">{{director}}</option>
-                    </select>
+
+                    <mat-label>Ingredientes </mat-label>
+                    <mat-select class="form-control" id="desayuno" formControlName="directoresx" multiple
+                        class="multipleSelect">
+                        <mat-option *ngFor="let eleccion of productosArray" [value]="eleccion">{{eleccion}}</mat-option>
+                    </mat-select>
                 </form>
             </div>
         </div>

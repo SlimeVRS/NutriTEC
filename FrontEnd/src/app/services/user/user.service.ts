@@ -1,3 +1,4 @@
+
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { userModel } from 'app/models/users';
@@ -9,6 +10,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class UserService {
   myAppUrl: 'http://localhost:55974/api/user';
   list: userModel[];
+  data2: userModel[];
+  usuarioActivo;
+  usertype;
   private actualizarForm = new BehaviorSubject<userModel>({} as any);
 
   constructor(private http: HttpClient) { }
@@ -23,6 +27,15 @@ export class UserService {
       console.log(data);
     }
     );
+  }
+  obtenerInfoLogin(usuario, password) {
+    this.http.get('http://localhost:55974/api/user/'+usuario+'/'+password).toPromise().then(data => {
+      this.list = data as userModel[];
+      return this.list;
+    }
+   
+    
+    ); return this.list;
   }
   obtenerProductosbyID() {
     this.http.get('http://localhost:55974/api/food/unchecked/1').toPromise().then(data => {
@@ -47,5 +60,10 @@ export class UserService {
     return this.http.get('http://localhost:55974/api/user')
                .toPromise()
                .then(response => this.list= response as userModel[]);         
+  }
+  getHeroes2(usuario, password): Promise<userModel[]> {
+    return this.http.get('http://localhost:55974/api/user/'+usuario+'/'+password)
+               .toPromise()
+               .then(response => this.list = response as userModel[]);         
   }
 }

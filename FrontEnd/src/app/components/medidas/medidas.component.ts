@@ -34,8 +34,8 @@ export class MedidasComponent implements OnInit {
       console.log(data);
       this.cliente = data;
       this.form.patchValue({
-        cedula: this.cliente.id_patient,
-        Pmusculo: this.cliente.muscle_patient,
+        cedula: this.cliente.id_patient_owner,
+        Pmusculo: this.cliente.actual_weight_patient,
         Mcadera: this.cliente.hip_patient,
         Mcuello: this.cliente.neck_patient,
         Mcintura: this.cliente.waist_patient,
@@ -55,8 +55,8 @@ export class MedidasComponent implements OnInit {
   }
   agregar() {
     const cliente: medidasModel = {
-      id_patient: this.form.get('cedula').value,
-      muscle_patient: this.form.get('Pmusculo').value,
+      id_patient_owner: 32561261,
+      actual_weight_patient: this.form.get('Pmusculo').value,
       hip_patient: this.form.get('Mcadera').value,
       neck_patient: this.form.get('Mcuello').value,
       waist_patient: this.form.get('Mcintura').value,
@@ -76,8 +76,8 @@ export class MedidasComponent implements OnInit {
   }
   editar() {
     const cliente: medidasModel = {
-      id_patient: this.form.get('cedula').value,
-      muscle_patient: this.form.get('Pmusculo').value,
+      id_patient_owner: this.form.get('cedula').value,
+      actual_weight_patient: this.form.get('Pmusculo').value,
       hip_patient: this.form.get('Mcadera').value,
       neck_patient: this.form.get('Mcuello').value,
       waist_patient: this.form.get('Mcintura').value,

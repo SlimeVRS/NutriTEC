@@ -1,4 +1,4 @@
-export class planesModel {
+export class recetaModel {
     id_recipe: number;
     name_recipe: string;
     ingredients:string;
