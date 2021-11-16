@@ -114,15 +114,6 @@ CREATE TABLE patients_recipes(
 	id_patient INT NOT NULL
 );
 
-ALTER TABLE users
-DROP CONSTRAINT FK_users_patients
-
-ALTER TABLE users
-DROP CONSTRAINT FK_users_admins
-
-ALTER TABLE users
-DROP CONSTRAINT FK_users_nutritionists
-
 ALTER TABLE patientmeasures
 ADD CONSTRAINT patientmeasures_patient
 FOREIGN KEY(id_patient_owner) REFERENCES patients(id_patient)
