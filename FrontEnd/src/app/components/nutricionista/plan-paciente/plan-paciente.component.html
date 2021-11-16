@@ -15,7 +15,7 @@
             </h6>
             
             <form [formGroup]="productosForm">
-              <select formControlName="directoresx" id="inputDirector">
+              <select formControlName="directoresx" id="clientes">
                 <option [value]='director' *ngFor="let director of productosArray">{{director}}</option>
               </select>
             </form>
@@ -29,14 +29,14 @@
             </h6>
            
             <form [formGroup]="planesForm">
-              <select formControlName="planesControl" id="inputDirector">
+              <select formControlName="planesControl" id="planes">
                 <option [value]='director' *ngFor="let director of planesArray">{{director}}</option>
               </select>
             </form>
         </div>
         <h1></h1>
         <div class="form-group">
-            <button class="button btn-sucess btn-lg btn-block" [disabled]="productosForm.invalid" type="submit">Aceptar</button>
+            <button class="button btn-sucess btn-lg btn-block" (click)="agregar()">Aceptar</button>
         </div>
     </div>
 </div>

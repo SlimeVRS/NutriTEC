@@ -13,6 +13,7 @@ export class RecetaService {
 
   constructor(private http: HttpClient) { }
   guardarProducto(producto: recetaModel): Observable<recetaModel> {
+    console.log(producto);
     return this.http.post<recetaModel>('http://localhost:55974/api/recipe', producto);
 
   }

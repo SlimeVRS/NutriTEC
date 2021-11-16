@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { asignacionPlanModel } from 'app/models/asignacionPlanModel';
+import { listaPacienteNutricionistaModel } from 'app/models/listadepacienteModel';
 import { medidasModel } from 'app/models/medidas';
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -12,13 +14,16 @@ export class MeasureService {
   private actualizarForm = new BehaviorSubject<medidasModel>({} as any);
 
   constructor(private http: HttpClient) { }
-  
+
   guardarProducto(producto: medidasModel): Observable<medidasModel> {
     return this.http.post<medidasModel>('http://localhost:55974/api/patient/mymeasures', producto);
   }
 
-  guardarAsignacionPlan(producto: medidasModel): Observable<medidasModel> {
-    return this.http.post<medidasModel>('http://localhost:55974/api/recipe/addnewrecipe', producto);
+  guardarAsignacionPlan(producto: asignacionPlanModel): Observable<asignacionPlanModel> {
+    return this.http.post<asignacionPlanModel>('http://localhost:55974/api/plan/addnewrecipe', producto);
+  }
+  guardarAsignacionPacienteANutricionista(producto: listaPacienteNutricionistaModel): Observable<listaPacienteNutricionistaModel> {
+    return this.http.post<listaPacienteNutricionistaModel>('http://localhost:55974/api/patient/addnutritionist', producto);
   }
 
   obtenerProductos() {

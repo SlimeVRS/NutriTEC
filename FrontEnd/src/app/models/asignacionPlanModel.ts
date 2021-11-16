@@ -1,4 +1,4 @@
 export class asignacionPlanModel {
-    id_patient:number;
-    id_recipe:number;
+    id_patient_nutritionist:number;
+    id_plan:number;
 }

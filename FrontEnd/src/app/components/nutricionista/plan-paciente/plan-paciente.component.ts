@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { asignacionPlanModel } from 'app/models/asignacionPlanModel';
 import { clientModel } from 'app/models/clientModel';
 import { planesModel } from 'app/models/planesModel';
 import { productoModel } from 'app/models/productoModel';
@@ -16,7 +17,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class PlanPacienteComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder, private productoService:ClienteService,public planesService: PlanService, public toastr: ToastrService) { }
+  constructor(private asignarPlan:MeasureService,private formBuilder: FormBuilder, private productoService:ClienteService,public planesService: PlanService, public toastr: ToastrService) { }
   productosForm: FormGroup;
   productos:any[];
   productosArray:any[];
@@ -66,6 +67,33 @@ export class PlanPacienteComponent implements OnInit {
       //  this.populateArray(this.filas,this.columnas);
       console.log(this.planesArray);
     });
+  }
+  getValueDate() {
+    var hora = (document.getElementById("clientes")) as HTMLSelectElement;
+    var selF = hora.selectedIndex;
+    var optF = hora.options[selF];
+    var valorFilas = (<HTMLSelectElement><unknown>optF).textContent;
+    return valorFilas;
+    
+  }
+  getValueDate2() {
+    var hora = (document.getElementById("planes")) as HTMLSelectElement;
+    var selF = hora.selectedIndex;
+    var optF = hora.options[selF];
+    var valorFilas = (<HTMLSelectElement><unknown>optF).textContent;
+    return valorFilas;
+    
+  }
+  agregar() {
+    const cliente: asignacionPlanModel = {
+      id_patient_nutritionist: parseInt(this.getValueDate()),
+      id_plan:  parseInt(this.getValueDate2()),
+    }
+    this.asignarPlan.guardarAsignacionPlan(cliente).subscribe(data => {
+      console.log(data);
+      this.toastr.success('Producto Guardado', 'Enviado Exitosamente');
+    });
+    console.log(cliente);
   }
 
 }
