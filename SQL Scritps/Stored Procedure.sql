@@ -144,8 +144,8 @@ DROP PROCEDURE usp_getunrelatedrecipes
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'p' AND name = 'usp_modifypatientnutritionist')
 DROP PROCEDURE usp_modifypatientnutritionist
 
-IF EXISTS (SELECT * FROM sys.objects WHERE type = 'p' AND name = 'usp_givenewrecipe')
-DROP PROCEDURE usp_givenewrecipe
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'p' AND name = 'usp_givenewplan')
+DROP PROCEDURE usp_givenewplan
 
 GO
 
@@ -759,12 +759,12 @@ CREATE PROCEDURE usp_modifyrecipe(@id_recipe INT, @name_recipe VARCHAR(255), @in
 	END
 GO
 
-CREATE PROCEDURE usp_givenewrecipe(@id_recipe INT, @id_patient_recipe INT)
+CREATE PROCEDURE usp_givenewplan(@id_plan INT, @id_patient_nutritionist INT)
 	AS
 	BEGIN
-		UPDATE recipes SET 
-			id_patient_recipe = @id_patient_recipe
-		WHERE id_recipe = @id_recipe
+		UPDATE food_plan SET 
+			id_patient_nutritionist = @id_patient_nutritionist
+		WHERE id_plan = @id_plan
 	END
 GO
 

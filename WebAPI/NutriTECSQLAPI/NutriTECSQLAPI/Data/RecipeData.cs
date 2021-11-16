@@ -117,27 +117,6 @@ namespace NutriTECSQLAPI.Data
             }
         }
 
-        public static bool GiveNewRecipe(RecipePatient recipe)
-        {
-            using (SqlConnection connection = new SqlConnection(Connection.connectionStringSQL))
-            {
-                SqlCommand cmd = new SqlCommand("usp_givenewrecipe", connection);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@id_recipe", recipe.id_recipe);
-                cmd.Parameters.AddWithValue("@id_patient_recipe", recipe.id_patient);
-                try
-                {
-                    connection.Open();
-                    cmd.ExecuteNonQuery();
-                    return true;
-                }
-                catch
-                {
-                    return false;
-                }
-            }
-        }
-
         public static Recipe GetRecipeById(int id_recipe)
         {
             Recipe recipe = new Recipe();

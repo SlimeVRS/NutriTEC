@@ -124,7 +124,7 @@
     <Compile Include="Models\PatientNutritionist.cs" />
     <Compile Include="Models\Plan.cs" />
     <Compile Include="Models\Recipe.cs" />
-    <Compile Include="Models\RecipePatient.cs" />
+    <Compile Include="Models\PlanPatient.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

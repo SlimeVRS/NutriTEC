@@ -138,6 +138,29 @@ namespace NutriTECSQLAPI.Data
             }
         }
 
+        public static bool GiveNewPlan(PlanPatient recipe)
+        {
+            using (SqlConnection connection = new SqlConnection(Connection.connectionStringSQL))
+            {
+                SqlCommand cmd = new SqlCommand("usp_givenewplan", connection);
+                cmd.CommandType = CommandType.StoredProcedure;
+                System.Diagnostics.Debug.WriteLine(recipe.id_plan);
+                System.Diagnostics.Debug.WriteLine(recipe.id_patient_nutritionist);
+                
+                cmd.Parameters.AddWithValue("@id_plan", recipe.id_plan);
+                cmd.Parameters.AddWithValue("@id_patient_nutritionist", recipe.id_patient_nutritionist);
+                try
+                {
+                    connection.Open();
+                    cmd.ExecuteNonQuery();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
         public static bool DeletePlanById(int id_plan)
         {
             using (SqlConnection connection = new SqlConnection(Connection.connectionStringSQL))

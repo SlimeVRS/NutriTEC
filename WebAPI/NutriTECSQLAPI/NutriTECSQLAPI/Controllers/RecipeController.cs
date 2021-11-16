@@ -29,13 +29,6 @@ namespace NutriTECSQLAPI.Controllers
             return RecipeData.GetUnrelatedRecipes();
         }
 
-        [Route("api/recipe/addnewrecipe")]
-        [HttpPost]
-        public bool laskdjal([FromBody] RecipePatient recipe)
-        {
-            return RecipeData.GiveNewRecipe(recipe);
-        }
-
         // POST api/<controller>
         [HttpPost]
         public bool RegisterNewRecipe([FromBody] Recipe recipe)

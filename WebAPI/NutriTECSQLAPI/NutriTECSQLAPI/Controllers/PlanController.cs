@@ -30,6 +30,12 @@ namespace NutriTECSQLAPI.Controllers
             return PlanData.RegisterNewPlan(plan);
         }
 
+        [HttpPost]
+        [Route("api/plan/addnewrecipe")]
+        public bool GiveNewPlan([FromBody] PlanPatient plan)
+        {
+            return PlanData.GiveNewPlan(plan);
+        }
         // PUT api/<controller>/5
         [HttpPut]
         public bool ModifyPlan(Plan plan)
