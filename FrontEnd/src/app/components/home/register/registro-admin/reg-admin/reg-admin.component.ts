@@ -81,6 +81,7 @@ export class RegAdminComponent implements OnInit {
       username: this.form.get('usuario').value,
       password: this.form.get('password').value,
       email: this.form.get('email').value,
+      user_owner:this.form.get('cedula').value,
       usertype: 0,
     }
     this.userService.guardarProducto(user).subscribe(data => {

@@ -25,9 +25,14 @@
 
         <div class="col-md-7">
             <h6 class="text-center" style="font-size: medium;">
-                Planes
+                Plan
             </h6>
-            <app-lista-planes></app-lista-planes>
+           
+            <form [formGroup]="planesForm">
+              <select formControlName="planesControl" id="inputDirector">
+                <option [value]='director' *ngFor="let director of planesArray">{{director}}</option>
+              </select>
+            </form>
         </div>
         <h1></h1>
         <div class="form-group">
